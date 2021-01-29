@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
-// TypeScript error? Run VSCode command
-// TypeScript: Select TypeScript version - > Use Workspace Version
 import App from './App.vue'
+import router from './router'
 
-createApp(App).mount('#app')
+import antdv from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
+
+createApp(App).use(router).use(antdv).mount('body')
