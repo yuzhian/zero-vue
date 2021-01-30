@@ -1,13 +1,13 @@
 <template>
   <a-layout-header class="layout-header">
     <div class="logo" @click="$router.push('/')" />
-    <menus :routes="routes" :current="['/']" mode="horizontal" theme="dark">
+    <router-menus :routes="routes" mode="horizontal" theme="dark">
       <template #right>
         <a-button ghost @click="$router.push('/dashboard')">
           <DashboardOutlined />控制台
         </a-button>
       </template>
-    </menus>
+    </router-menus>
   </a-layout-header>
 
   <a-layout-content class="layout-content">
@@ -23,18 +23,18 @@
 import { defineComponent } from 'vue'
 import routes from '../../router/public'
 
-import Menus from '../../components/menus/index.vue'
+import RouterMenus from '../../components/RouterMenus.vue'
 
 import { DashboardOutlined } from '@ant-design/icons-vue'
 
 export default defineComponent({
   name: 'PublicLayout',
   components: {
-    Menus,
+    RouterMenus,
     DashboardOutlined,
   },
   data: () => ({
-    routes: routes,
+    routes: routes.filter(({ path, meta: { hidden } }) => path !== '/' && !hidden),
   }),
 })
 </script>

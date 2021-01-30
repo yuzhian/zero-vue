@@ -1,11 +1,11 @@
 <template>
   <a-layout-header class="layout-header">
-    <div class="logo" @click="$router.push('/')" />
+    <div class="logo" @click="$router.push('/dashboard')" />
     <div style="float: right;">
       <a-dropdown>
-        <a-avatar :src="avatar" />
+        <a-avatar :src="avatar" :style="{ cursor: 'pointer' }" />
         <template #overlay>
-          <user-info-box :banner="banner" :avatar="avatar" :nickname="nickname" :bio="bio" />
+          <user-card :banner="banner" :avatar="avatar" :nickname="nickname" :bio="bio" />
         </template>
       </a-dropdown>
     </div>
@@ -13,10 +13,11 @@
 
   <a-layout>
     <a-layout-sider class="layout-sider">
-      <menus :routes="routes" :current="['/dashboard']" />
+      <router-menus :routes="routes" />
     </a-layout-sider>
     <a-layout-content class="layout-content">
       <router-view />
+      <back-top />
     </a-layout-content>
   </a-layout>
 
@@ -29,17 +30,19 @@
 import { defineComponent } from 'vue'
 import routes from '../../router/management'
 
-import Menus from '../../components/menus/index.vue'
-import UserInfoBox from '../../components/UserInfoBox.vue'
+import RouterMenus from '../../components/RouterMenus.vue'
+import UserCard from '../../components/UserCard.vue'
+import BackTop from '../../components/BackTop.vue'
 
 export default defineComponent({
   name: 'ManagementLayout',
   components: {
-    Menus,
-    UserInfoBox,
+    RouterMenus,
+    UserCard,
+    BackTop,
   },
   data: () => ({
-    routes: routes,
+    routes: routes.filter(({ path, meta }) => path !== '/dashboard' && (!meta || !meta.hidden)),
     banner: 'https://source.unsplash.com/300x200',
     avatar: 'https://source.unsplash.com/64x64',
     nickname: '张三',
@@ -80,6 +83,8 @@ export default defineComponent({
 
 .layout-content {
   margin-left: 200px;
+  padding-top: 64px;
+  min-height: calc(100vh - 70px);
 }
 
 .layout-footer {

@@ -1,8 +1,8 @@
 <template>
   <a-menu :theme="theme" :mode="mode" :style="{ background: '#ffffff00', lineHeight: '64px' }"
     v-model:selectedKeys="current">
-    <a-menu-item v-for="({ name, path, meta: { title } }) of routes" :key="path">
-      {{ title || name || path }}
+    <a-menu-item v-for="({ name, path, meta }) of routes" :key="path" @click="$router.push(path)">
+      {{ meta && meta.title || name || path }}
     </a-menu-item>
     <div style="float: right;">
       <slot name="right" />
@@ -27,9 +27,17 @@ export default defineComponent({
       type: String,
       default: 'inline',
     },
-    current: {
-      type: Array,
-      default: [],
+  },
+  data() {
+    return {
+      current: [this.$route.path],
+    }
+  },
+  watch: {
+    $route: {
+      handler({ path }) {
+        this.current = [path]
+      },
     },
   },
 })
