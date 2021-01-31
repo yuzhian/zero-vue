@@ -2,7 +2,7 @@
   <a-layout-header class="layout-header">
     <div class="logo" @click="$router.push('/')" />
     <router-menus :routes="routes" mode="horizontal" theme="dark">
-      <template #right>
+      <template #rightPanel>
         <a-button ghost @click="$router.push('/dashboard')">
           <DashboardOutlined />控制台
         </a-button>

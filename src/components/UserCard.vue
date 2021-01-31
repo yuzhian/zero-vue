@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card hoverable :style="{ width: '300px' }">
+    <a-card :bordered="false" class="user-card">
       <template #cover>
         <img :src="banner" :width="300" :height="200" />
       </template>
@@ -51,4 +51,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.user-card {
+  width: 300px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
 </style>

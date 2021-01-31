@@ -5,7 +5,7 @@
       {{ meta && meta.title || name || path }}
     </a-menu-item>
     <div style="float: right;">
-      <slot name="right" />
+      <slot name="rightPanel" />
     </div>
   </a-menu>
 </template>
