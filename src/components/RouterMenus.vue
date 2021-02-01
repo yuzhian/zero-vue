@@ -1,7 +1,8 @@
 <template>
-  <a-menu :theme="theme" :mode="mode" :style="{ background: '#ffffff00', lineHeight: '64px' }"
-    v-model:selectedKeys="current">
+  <a-menu :theme="theme" :mode="mode" class="router-tree" v-model:selectedKeys="current">
     <a-menu-item v-for="({ name, path, meta }) of routes" :key="path" @click="$router.push(path)">
+      <component v-if="meta && meta.icon" :is="antIcons[meta.icon]" />
+      <component v-else :is="antIcons['BorderOuterOutlined']" />
       {{ meta && meta.title || name || path }}
     </a-menu-item>
     <div style="float: right;">
@@ -12,6 +13,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+import * as antIcons from '@ant-design/icons-vue'
 
 export default defineComponent({
   props: {
@@ -31,6 +33,7 @@ export default defineComponent({
   data() {
     return {
       current: [this.$route.path],
+      antIcons: antIcons,
     }
   },
   watch: {
@@ -44,6 +47,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.router-tree {
+  background: #ffffff00;
+  line-height: 64px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .ant-menu-item-selected {
   background-color: rgba(255, 255, 255, 0.2) !important;
 }

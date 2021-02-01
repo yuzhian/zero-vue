@@ -6,7 +6,7 @@
       <SettingOutlined />
       <MessageOutlined />
       <AppstoreOutlined />
-      <a-dropdown :trigger="['click']" :overlayStyle="{ position: 'fixed' }">
+      <a-dropdown :trigger="['click']" :overlayStyle="{ position: 'absolute' }">
         <a-avatar :src="avatar" :style="{ cursor: 'pointer' }" />
         <template #overlay>
           <user-card :banner="banner" :avatar="avatar" :nickname="nickname" :bio="bio" />
@@ -15,19 +15,14 @@
     </div>
   </a-layout-header>
 
-  <a-layout>
-    <a-layout-sider class="layout-sider">
-      <router-menus :routes="routes" />
-    </a-layout-sider>
-    <a-layout-content class="layout-content">
-      <router-view :key="$route.fullPath" v-if="routerAlive" />
-      <back-top />
-    </a-layout-content>
-  </a-layout>
+  <a-layout-sider class="layout-sider">
+    <router-menus :routes="routes" />
+  </a-layout-sider>
 
-  <a-layout-footer class="layout-footer">
-    Ant Design ©2018 Created by Ant UED
-  </a-layout-footer>
+  <a-layout-content class="layout-content">
+    <router-view :key="$route.fullPath" v-if="routerAlive" />
+    <back-top />
+  </a-layout-content>
 </template>
 
 <script>
@@ -54,7 +49,7 @@ export default defineComponent({
   data: () => ({
     routes: routes.filter(({ path, meta }) => path !== '/dashboard' && (!meta || !meta.hidden)),
     banner: 'https://source.unsplash.com/300x200',
-    avatar: 'https://source.unsplash.com/64x64',
+    avatar: 'https://source.unsplash.com/32x32',
     nickname: '张三',
     bio: '法外狂徒张三',
     routerAlive: true,
@@ -71,8 +66,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+header.layout-header,
+aside.layout-sider,
+main.layout-content {
+  --header-height: 64px;
+  --side-width: 200px;
+}
+
 header.layout-header {
-  position: fixed;
+  position: absolute;
   z-index: 100;
   width: 100vw;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
@@ -90,19 +92,22 @@ header.layout-header {
   }
 
   .right-panel {
-    height: 64px;
+    height: var(--header-height);
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     font-size: 1.25rem;
     color: white;
-    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
     & > span {
       margin: 0 0.5rem;
       -webkit-transition: 0.2s;
       -ms-transition: 0.2s;
       transition: 0.2s;
+      cursor: pointer;
     }
     & > span:active {
       color: #9e9e9e;
@@ -115,23 +120,24 @@ header.layout-header {
   }
 }
 
-.layout-sider {
-  position: fixed;
+aside.layout-sider {
+  position: absolute;
   overflow: auto;
   left: 0;
   bottom: 0;
-  width: 200px;
-  height: calc(100vh - 64px);
+  width: var(--side-width);
+  height: calc(100vh - var(--header-height));
   background: #f0f2f5;
 }
 
-.layout-content {
-  margin-left: 200px;
-  padding-top: 64px;
-  min-height: calc(100vh - 70px);
-}
-
-.layout-footer {
-  text-align: center;
+main.layout-content {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--side-width));
+  padding: 1rem;
+  overflow: auto;
+  background: #f0f2f5;
 }
 </style>

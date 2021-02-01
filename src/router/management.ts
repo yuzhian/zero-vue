@@ -9,7 +9,7 @@ export default [
     path: '/demo/full',
     name: 'Demo1',
     component: () => import('../views/demo/RoutePanel.vue'),
-    meta: { title: '测试页1' },
+    meta: { title: '测试页1', icon: 'TrophyOutlined' },
   },
   {
     path: '/demo/hidden',

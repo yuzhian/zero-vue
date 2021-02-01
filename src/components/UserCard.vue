@@ -30,22 +30,10 @@ export default defineComponent({
     EllipsisOutlined,
   },
   props: {
-    banner: {
-      type: String,
-      default: JSON.parse(localStorage.getItem('userinfo'))['banner'],
-    },
-    avatar: {
-      type: String,
-      default: JSON.parse(localStorage.getItem('userinfo'))['avatar'],
-    },
-    nickname: {
-      type: String,
-      default: JSON.parse(localStorage.getItem('userinfo'))['nickname'],
-    },
-    bio: {
-      type: String,
-      default: JSON.parse(localStorage.getItem('userinfo'))['bio'],
-    },
+    banner: { type: String },
+    avatar: { type: String },
+    nickname: { type: String },
+    bio: { type: String },
   },
 })
 </script>

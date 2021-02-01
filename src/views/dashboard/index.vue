@@ -1,11 +1,11 @@
 <template>
-  <main>
+  <main class="page-main">
     <a-alert type="info" :message="message" :description="description" show-icon closable style="margin-bottom: 0.5rem">
       <template #icon>
         <smile-outlined />
       </template>
     </a-alert>
-    <a-card title="系统信息" style="width: 100%;">
+    <a-card title="系统信息" :style="{ width: '100%' }">
       <dependencies title="项目依赖" :dependencies="dependencies" />
       <br>
       <dependencies title="开发依赖" :dependencies="devDependencies" />
@@ -38,12 +38,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-main {
-  display: flex;
-  padding: 0 10%;
-  height: 100vh;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.page-main {
+  height: 1000vh;
 }
 </style>
