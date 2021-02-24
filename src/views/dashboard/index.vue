@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { dependencies, devDependencies } from '/package.json'
+import { dependencies, devDependencies } from '../../../package.json'
 
 import Dependencies from './Dependencies.vue'
 

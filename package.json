@@ -6,6 +6,7 @@
     "build": "vite build",
     "serve": "vite preview"
   },
+  "license": "MIT",
   "dependencies": {
     "ant-design-vue": "^2.0.0",
     "axios": "^0.21.1",

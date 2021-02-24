@@ -5,7 +5,7 @@ import router from './router'
 import antdv from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
-import './plugins'
+import components from './components/glob'
 
 import { makeServer } from './mock/server'
 
@@ -13,4 +13,8 @@ if (import.meta.env.MODE === 'development') {
   makeServer()
 }
 
-createApp(App).use(router).use(antdv).mount('body')
+const app = createApp(App).use(router).use(antdv)
+for (const key in components) {
+  app.component(key, components[key])
+}
+app.mount('body')
