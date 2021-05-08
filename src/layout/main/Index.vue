@@ -1,32 +1,24 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div class="layout-container">
+    <home-carousel v-if="$route.path === '/'" />
+    <a-affix :offset-top="0">
+      <menu-bar />
+    </a-affix>
+    <router-view />
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import HomeCarousel from "./HomeCarousel.vue";
+import MenuBar from "./MenuBar.vue";
 
-#nav {
-  padding: 30px;
+export default {
+  components: { MenuBar, HomeCarousel },
+};
+</script>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style scoped>
+.layout-container {
+  height: 100vh;
 }
 </style>

@@ -9,3 +9,9 @@ export default {
   name: "Home",
 };
 </script>
+
+<style lang="less" scoped>
+.home {
+  text-align: center;
+}
+</style>
