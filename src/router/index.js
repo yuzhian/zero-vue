@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import main from './main'
+import demo from './demo'
 
 Vue.use(VueRouter)
 
@@ -9,7 +10,14 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layout/main/Index'),
-    children: main
+    children: [
+      ...main,
+      {
+        path: 'demo',
+        component: { render: h => h("router-view") },
+        children: demo
+      },
+    ]
   },
 ]
 
