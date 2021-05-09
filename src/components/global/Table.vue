@@ -1,27 +1,32 @@
-<template>
-  <a-table
-    v-bind="$attrs"
-    :data-source="dataSource"
-    :pagination="pagination"
-    :columns="showNo ? columnsWithNo : columns"
-    :row-key="(item, index) => item[rowKey] || index"
-    :row-selection="completeRowSelection"
-    @change="handleConditionChange"
-  />
-</template>
-
 <script>
 export default {
+  render() {
+    return (
+      <a-table
+        props={{
+          ...this.$attrs,
+          dataSource: this.dataSource,
+          columns: this.completeColumns,
+          rowSelection: this.completeRowSelection,
+          rowKey: (item, index) => item[this.rowKey] || index,
+          change: this.handleConditionChange,
+          pagination: this.pagination,
+        }}
+        on={this.$listeners}
+        scopedSlots={this.$scopedSlots}
+      />
+    );
+  },
   props: {
     // query
-    fetch: { type: Function, default: () => {} },
+    fetch: { type: Function },
     params: { type: Object, default: () => ({}) },
     // result mapping
-    columns: { type: Array, default: () => ({}) },
+    columns: { type: Array, default: () => [] },
     // extension options
-    showNo: { type: Boolean, default: false }, // 显示序号
-    rowSelection: [Object, Boolean], // 多行复选框参数
     rowKey: { type: String, default: "id" }, // 多选时存到 selectedRowKeys 中的值的名称
+    rowNo: { type: Boolean }, // 显示序号
+    rowSelection: [Object, Boolean], // 显示复选框
     // pagination
     total: { type: Number, default: 0 },
     current: { type: Number, default: 1 },
@@ -38,22 +43,23 @@ export default {
         current: this.current,
         pageSize: this.pageSize,
       },
-      // 过滤
+      // 过滤参数
       filters: {},
-      // 排序
+      // 排序参数
       sorter: {},
     };
   },
   computed: {
-    columnsWithNo() {
-      return [
-        {
-          title: "序号",
-          width: 60,
-          align: "center",
-          customRender: (t, r, index) => parseInt(index) + 1,
-        },
-      ].concat(this.columns);
+    // 根据自定义参数重构表格列
+    completeColumns() {
+      // 显示行号
+      if (this.rowNo) {
+        const calc = (t, r, i) => parseInt(i) + 1;
+        const no = { title: "序号", width: 60, customRender: calc };
+        return [no].concat(this.columns);
+      }
+      // todo other...
+      return this.columns;
     },
     // 覆盖多行复选框调用方的修改, 由组件接管选中结果集和选框更改回调
     completeRowSelection() {
@@ -73,6 +79,9 @@ export default {
   methods: {
     // 查询
     handleFetch() {
+      if (!this.fetch) {
+        throw "undefined fetch function";
+      }
       this.fetch({
         ...this.pagination,
         ...this.filters,
@@ -92,8 +101,9 @@ export default {
       this.handleFetch();
     },
     // 处理复选框变化
-    handleSelectionChange(selectedRowKeys) {
+    handleSelectionChange(selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys;
+      this.$emit("checked-change", selectedRowKeys, selectedRows);
     },
   },
 };
