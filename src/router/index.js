@@ -10,14 +10,12 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layout/main/Index'),
-    children: [
-      ...main,
-      {
-        path: 'demo',
-        component: { render: h => h("router-view") },
-        children: demo
-      },
-    ]
+    children: main
+  },
+  {
+    path: '/demo',
+    component: { render: h => h("router-view") },
+    children: demo
   },
 ]
 

@@ -1,19 +1,28 @@
 <template>
   <a-table
-    :data-source="results"
-    :columns="columns"
+    v-bind="$attrs"
+    :data-source="dataSource"
     :pagination="pagination"
-    :rowKey="(item, index) => index"
-    @change="handleChange"
+    :columns="showNo ? columnsWithNo : columns"
+    :row-key="(item, index) => item[rowKey] || index"
+    :row-selection="completeRowSelection"
+    @change="handleConditionChange"
   />
 </template>
 
 <script>
 export default {
   props: {
-    // 查询函数
+    // query
     fetch: { type: Function, default: () => {} },
-    columns: { type: Array, default: () => [] },
+    params: { type: Object, default: () => ({}) },
+    // result mapping
+    columns: { type: Array, default: () => ({}) },
+    // extension options
+    showNo: { type: Boolean, default: false }, // 显示序号
+    rowSelection: [Object, Boolean], // 多行复选框参数
+    rowKey: { type: String, default: "id" }, // 多选时存到 selectedRowKeys 中的值的名称
+    // pagination
     total: { type: Number, default: 0 },
     current: { type: Number, default: 1 },
     pageSize: { type: Number, default: 20 },
@@ -21,29 +30,70 @@ export default {
   data() {
     return {
       // 结果集
-      results: [],
+      dataSource: [],
+      selectedRowKeys: [],
       // 分页参数
       pagination: {
         total: this.total,
         current: this.current,
         pageSize: this.pageSize,
       },
+      // 过滤
+      filters: {},
+      // 排序
+      sorter: {},
     };
   },
+  computed: {
+    columnsWithNo() {
+      return [
+        {
+          title: "序号",
+          width: 60,
+          align: "center",
+          customRender: (t, r, index) => parseInt(index) + 1,
+        },
+      ].concat(this.columns);
+    },
+    // 覆盖多行复选框调用方的修改, 由组件接管选中结果集和选框更改回调
+    completeRowSelection() {
+      if (!this.rowSelection) return;
+      let append = {
+        selectedRowKeys: this.selectedRowKeys, // 已选结果集
+        onChange: this.handleSelectionChange, // 选框更改回调
+      };
+      return typeof this.rowSelection === Boolean.name.toLowerCase()
+        ? append
+        : { ...this.rowSelection, ...append };
+    },
+  },
   created() {
-    this.handleQuery();
+    this.handleFetch();
   },
   methods: {
-    handleQuery() {
-      this.fetch(this.pagination).then((resp) => {
-        this.results = resp[process.env.VUE_APP_PAGINATION_RESULTS];
+    // 查询
+    handleFetch() {
+      this.fetch({
+        ...this.pagination,
+        ...this.filters,
+        ...this.sorter,
+        ...this.params,
+      }).then((resp) => {
+        this.dataSource = resp[process.env.VUE_APP_PAGINATION_RESULTS];
         this.pagination.current = resp[process.env.VUE_APP_PAGINATION_CURRENT];
         this.pagination.total = resp[process.env.VUE_APP_PAGINATION_TOTAL];
       });
     },
-    handleChange(pagination) {
+    // 处理 分页 过滤 排序 条件变化
+    handleConditionChange(pagination, filters, { field, order }) {
       this.pagination = pagination;
-      this.handleQuery();
+      this.filters = filters;
+      this.sorter = { field, order };
+      this.handleFetch();
+    },
+    // 处理复选框变化
+    handleSelectionChange(selectedRowKeys) {
+      this.selectedRowKeys = selectedRowKeys;
     },
   },
 };
