@@ -1,4 +1,9 @@
 <script>
+/**
+ * 在支持 antdv table 组件所有功能的前提下扩展
+ * - 自动组装查询项, 拉取数据, 处理结果集(由父组件提供请求函数和结果集映射)
+ * - 常用附加列配置, 并使用 props 参数控制
+ */
 export default {
   render() {
     return (
@@ -6,31 +11,30 @@ export default {
         props={{
           ...this.$attrs,
           dataSource: this.dataSource,
-          columns: this.completeColumns,
-          rowSelection: this.completeRowSelection,
+          pagination: this.paginationData,
+          columns: this.computedColumns,
+          rowSelection: this.computedRowSelection,
           rowKey: (item, index) => item[this.rowKey] || index,
-          change: this.handleConditionChange,
-          pagination: this.pagination,
         }}
-        on={this.$listeners}
+        on={{
+          ...this.$listeners,
+          change: this.handleConditionChange,
+        }}
         scopedSlots={this.$scopedSlots}
       />
     );
   },
   props: {
-    // query
-    fetch: { type: Function },
-    params: { type: Object, default: () => ({}) },
-    // result mapping
+    // antdv
     columns: { type: Array, default: () => [] },
-    // extension options
-    rowKey: { type: String, default: "id" }, // 多选时存到 selectedRowKeys 中的值的名称
-    rowNo: { type: Boolean }, // 显示序号
-    rowSelection: [Object, Boolean], // 显示复选框
-    // pagination
-    total: { type: Number, default: 0 },
-    current: { type: Number, default: 1 },
-    pageSize: { type: Number, default: 20 },
+    pagination: { type: Object, default: () => ({}) },
+    rowKey: { type: String, default: "id" },
+    // custom
+    fetch: { type: Function, required: true },
+    lazy: { type: Boolean, default: false },
+    params: { type: Object, default: () => ({}) },
+    rowNo: { type: [Boolean, String] }, // 序号, 标题
+    rowSelection: { type: [Boolean, Object] }, // 复选框, 选项
   },
   data() {
     return {
@@ -38,10 +42,11 @@ export default {
       dataSource: [],
       selectedRowKeys: [],
       // 分页参数
-      pagination: {
-        total: this.total,
-        current: this.current,
-        pageSize: this.pageSize,
+      paginationData: {
+        total: 0,
+        current: 1,
+        pageSize: 20,
+        ...this.pagination,
       },
       // 过滤参数
       filters: {},
@@ -50,60 +55,60 @@ export default {
     };
   },
   computed: {
-    // 根据自定义参数重构表格列
-    completeColumns() {
-      // 显示行号
-      if (this.rowNo) {
-        const calc = (t, r, i) => parseInt(i) + 1;
-        const no = { title: "序号", width: 60, customRender: calc };
-        return [no].concat(this.columns);
-      }
-      // todo other...
-      return this.columns;
+    computedColumns() {
+      let columns = [];
+      this.rowNo &&
+        columns.push({
+          title: typeof this.rowNo === "string" ? this.rowNo : "序号",
+          width: 60,
+          customRender: (t, r, i) => parseInt(i) + 1,
+        });
+      columns.push.apply(columns, this.columns);
+      return columns;
     },
-    // 覆盖多行复选框调用方的修改, 由组件接管选中结果集和选框更改回调
-    completeRowSelection() {
+    computedRowSelection() {
       if (!this.rowSelection) return;
-      let append = {
-        selectedRowKeys: this.selectedRowKeys, // 已选结果集
-        onChange: this.handleSelectionChange, // 选框更改回调
+      // 接管选中结果集和选框变化函数
+      const overlay = {
+        selectedRowKeys: this.selectedRowKeys,
+        onChange: this.handleSelectionChange,
       };
-      return typeof this.rowSelection === Boolean.name.toLowerCase()
-        ? append
-        : { ...this.rowSelection, ...append };
+      return typeof this.rowSelection === "boolean"
+        ? overlay
+        : { ...this.rowSelection, ...overlay };
     },
   },
   created() {
-    this.handleFetch();
+    if (!this.lazy) {
+      this.handleFetch();
+    }
   },
   methods: {
     // 查询
     handleFetch() {
-      if (!this.fetch) {
-        throw "undefined fetch function";
-      }
       this.fetch({
-        ...this.pagination,
+        ...this.paginationData,
         ...this.filters,
         ...this.sorter,
         ...this.params,
       }).then((resp) => {
         this.dataSource = resp[process.env.VUE_APP_PAGINATION_RESULTS];
-        this.pagination.current = resp[process.env.VUE_APP_PAGINATION_CURRENT];
-        this.pagination.total = resp[process.env.VUE_APP_PAGINATION_TOTAL];
+        this.paginationData.current =
+          resp[process.env.VUE_APP_PAGINATION_CURRENT];
+        this.paginationData.total = resp[process.env.VUE_APP_PAGINATION_TOTAL];
       });
     },
     // 处理 分页 过滤 排序 条件变化
     handleConditionChange(pagination, filters, { field, order }) {
-      this.pagination = pagination;
+      this.paginationData = pagination;
       this.filters = filters;
       this.sorter = { field, order };
       this.handleFetch();
     },
-    // 处理复选框变化
+    // 处理 复选框 变化
     handleSelectionChange(selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys;
-      this.$emit("checked-change", selectedRowKeys, selectedRows);
+      this.$emit("selection-change", selectedRowKeys, selectedRows);
     },
   },
 };

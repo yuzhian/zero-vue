@@ -2,7 +2,7 @@ import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
-const requireComponent = require.context('@/components/global', true, /\.vue$/)
+const requireComponent = require.context('@/components/global', true, /\.(vue|js|ts)$/)
 
 // ./src/components/global
 for (const file of requireComponent.keys()) {
