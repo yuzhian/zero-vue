@@ -27,4 +27,10 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, form, next) => {
+  let prefix = to.meta.title || to.name || ""
+  document.title = `${prefix && prefix + " | "}${process.env.VUE_APP_TITLE}`
+  next()
+})
+
 export default router
