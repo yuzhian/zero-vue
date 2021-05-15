@@ -9,8 +9,8 @@
 <style scoped>
 .ant-carousel >>> .slick-slide {
   text-align: center;
-  height: calc(100vh - 64px);
-  line-height: calc(100vh - 64px);
+  height: calc(100vh - 63px);
+  line-height: calc(100vh - 63px);
   background: #000000cc;
 }
 

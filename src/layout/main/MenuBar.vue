@@ -35,3 +35,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.ant-menu.ant-menu-dark .ant-menu-item-selected,
+.ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: #000000cc;
+}
+</style>
