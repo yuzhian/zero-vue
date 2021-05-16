@@ -7,7 +7,6 @@ import './plugins'
 
 import antdv from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
-import 'windi.css'
 
 Vue.use(antdv)
 

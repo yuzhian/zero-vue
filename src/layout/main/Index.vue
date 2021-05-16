@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen">
+  <div class="layout-container">
     <home-carousel v-if="$route.path === '/'" />
     <a-affix :offset-top="0">
       <menu-bar />
@@ -16,3 +16,9 @@ export default {
   components: { MenuBar, HomeCarousel },
 };
 </script>
+
+<style scoped>
+.layout-container {
+  height: 100vh;
+}
+</style>

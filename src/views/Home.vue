@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen">
-    <img alt="Vue logo" src="../assets/logo.png" class="m-auto" />
+  <div class="home">
+    <img alt="Vue logo" src="../assets/logo.png" />
   </div>
 </template>
 
@@ -9,3 +9,9 @@ export default {
   name: "Home",
 };
 </script>
+
+<style lang="less" scoped>
+.home {
+  text-align: center;
+}
+</style>
