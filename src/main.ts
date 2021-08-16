@@ -5,7 +5,7 @@ import router from './router'
 import antdv from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
-import components from './components/glob'
+import components from './plugins/components'
 
 import { makeServer } from './mock/server'
 
