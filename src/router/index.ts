@@ -1,24 +1,24 @@
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
+import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
 
-import publicRoutes from './public'
-import managementRoutes from './management'
-import errorRoutes from './error'
+import displayRoutes from './display'
+import consoleRoutes from './console'
+import commonRoutes from './common'
 
 const routes: RouteRecordRaw[] = [
   // 公开页面, 首页/新闻/产品/支持等, 上中下布局
   {
     path: '/',
-    component: () => import('../layout/public/index.vue'),
-    children: publicRoutes,
+    component: () => import('@/layout/display/index.vue'),
+    children: displayRoutes,
   },
   // 控制台, 用户服务等, 顶部-侧边布局
   {
     path: '/',
-    component: () => import('../layout/management/index.vue'),
-    children: managementRoutes,
+    component: () => import('@/layout/console/index.vue'),
+    children: consoleRoutes,
   },
-  // 异常页面, 401/403/500/404等, 单页
-  ...errorRoutes,
+  // 公共页面, 
+  ...commonRoutes,
 ]
 
 const router = createRouter({
@@ -26,8 +26,8 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from) => {
-  document.title = to.meta.title || to.name || to.path
+router.beforeEach((to: RouteLocationNormalized, from) => {
+  document.title = to.meta.title as string || to.name?.toString() || to.path
   return true
 })
 

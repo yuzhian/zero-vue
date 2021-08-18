@@ -11,38 +11,22 @@
   </a-menu>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
+import { reactive } from '@vue/reactivity'
+import { useRoute,onBeforeRouteUpdate } from 'vue-router'
+
 import * as antIcons from '@ant-design/icons-vue'
 
-export default defineComponent({
-  props: {
-    routes: {
-      type: Array,
-      default: () => [],
-    },
-    theme: {
-      type: String,
-      default: 'light',
-    },
-    mode: {
-      type: String,
-      default: 'inline',
-    },
-  },
-  data() {
-    return {
-      current: [this.$route.path],
-      antIcons: antIcons,
-    }
-  },
-  watch: {
-    $route: {
-      handler({ path }) {
-        this.current = [path]
-      },
-    },
-  },
+const props = defineProps({
+  routes: { type: Array, default: () => [] },
+  theme: { type: String, default: 'light' },
+  mode: { type: String, default: 'inline' },
+})
+
+const route = useRoute()
+let current = reactive([route.path])
+onBeforeRouteUpdate((to) => {
+  current[0] = to.path
 })
 </script>
 

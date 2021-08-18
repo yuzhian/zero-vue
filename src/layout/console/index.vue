@@ -16,7 +16,7 @@
   </a-layout-header>
 
   <a-layout-sider class="layout-sider">
-    <router-menus :routes="routes" />
+    <router-menus :routes="menus" />
   </a-layout-sider>
 
   <a-layout-content class="layout-content">
@@ -25,44 +25,28 @@
   </a-layout-content>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-import routes from '../../router/management'
-
-import RouterMenus from '../../components/RouterMenus.vue'
-import UserCard from '../../components/UserCard.vue'
-import BackTop from '../../components/BackTop.vue'
-
+<script setup>
+import { nextTick } from 'vue'
 import { SettingOutlined, AppstoreOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
 
-export default defineComponent({
-  name: 'ManagementLayout',
-  components: {
-    RouterMenus,
-    UserCard,
-    BackTop,
-    SettingOutlined,
-    AppstoreOutlined,
-    MessageOutlined,
-    SyncOutlined,
-  },
-  data: () => ({
-    routes: routes.filter(({ path, meta }) => path !== '/dashboard' && (!meta || !meta.hidden)),
-    banner: 'https://source.unsplash.com/300x200',
-    avatar: 'https://source.unsplash.com/32x32',
-    nickname: '张三',
-    bio: '法外狂徒张三',
-    routerAlive: true,
-  }),
-  methods: {
-    reloadRoute() {
-      this.routerAlive = false
-      this.$nextTick(function () {
-        this.routerAlive = true
-      })
-    },
-  },
-})
+import RouterMenus from '@/components/RouterMenus.vue'
+import UserCard from '@/components/UserCard.vue'
+import BackTop from '@/components/BackTop.vue'
+
+import routes from '/src/router/console'
+
+const menus = routes.filter(({ path, meta }) => path !== '/dashboard' && (!meta || !meta.hidden))
+const banner = 'https://source.unsplash.com/300x200'
+const avatar = 'https://source.unsplash.com/32x32'
+const nickname = '张三'
+const bio = '法外狂徒张三'
+
+let routerAlive = true
+
+const reloadRoute = () => {
+  routerAlive = false
+  nextTick(() => (routerAlive = true))
+}
 </script>
 
 <style lang="scss" scoped>

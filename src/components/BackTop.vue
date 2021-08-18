@@ -4,16 +4,8 @@
   </a-back-top>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup>
 import { VerticalAlignTopOutlined } from '@ant-design/icons-vue'
-
-export default defineComponent({
-  name: 'BackTop',
-  components: {
-    VerticalAlignTopOutlined,
-  },
-})
 </script>
 
 <style lang="scss" scoped>

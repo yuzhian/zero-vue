@@ -1,7 +1,7 @@
 <template>
   <a-layout-header class="layout-header">
     <div class="logo" @click="$router.push('/')" />
-    <router-menus :routes="routes" mode="horizontal" theme="dark">
+    <router-menus :routes="menus" theme="dark">
       <template #rightPanel>
         <a-button ghost @click="$router.push('/dashboard')">
           <DashboardOutlined />控制台
@@ -14,29 +14,17 @@
     <router-view />
   </a-layout-content>
 
-  <a-layout-footer class="layout-footer">
-    Ant Design ©2018 Created by Ant UED
-  </a-layout-footer>
+  <a-layout-footer class="layout-footer">Ant Design ©2018 Created by Ant UED</a-layout-footer>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-import routes from '../../router/public'
-
-import RouterMenus from '../../components/RouterMenus.vue'
-
+<script setup>
 import { DashboardOutlined } from '@ant-design/icons-vue'
 
-export default defineComponent({
-  name: 'PublicLayout',
-  components: {
-    RouterMenus,
-    DashboardOutlined,
-  },
-  data: () => ({
-    routes: routes.filter(({ path, meta: { hidden } }) => path !== '/' && !hidden),
-  }),
-})
+import RouterMenus from '@/components/RouterMenus.vue'
+
+import routes from '@/router/display'
+
+const menus = routes.filter(({ path, meta: { hidden } }) => path !== '/' && !hidden)
 </script>
 
 <style lang="scss" scoped>

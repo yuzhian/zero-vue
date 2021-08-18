@@ -18,23 +18,14 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import { SettingOutlined, EditOutlined, EllipsisOutlined } from '@ant-design/icons-vue'
 
-export default defineComponent({
-  name: 'ManagementLayout',
-  components: {
-    SettingOutlined,
-    EditOutlined,
-    EllipsisOutlined,
-  },
-  props: {
-    banner: { type: String },
-    avatar: { type: String },
-    nickname: { type: String },
-    bio: { type: String },
-  },
+const props = defineProps({
+  banner: { type: String },
+  avatar: { type: String },
+  nickname: { type: String },
+  bio: { type: String },
 })
 </script>
 
