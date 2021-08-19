@@ -1,5 +1,5 @@
 <template>
-  <main :style="style"></main>
+  <main class="h-screen" :style="style"></main>
 </template>
 
 <script setup>
@@ -9,9 +9,3 @@ const style = {
   backgroundSize: 'cover',
 }
 </script>
-
-<style lang="scss" scoped>
-main {
-  height: 100vh;
-}
-</style>

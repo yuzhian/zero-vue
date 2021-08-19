@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card :bordered="false" class="user-card">
+    <a-card :bordered="false" class="w-300px shadow-xl">
       <template #cover>
         <img :src="banner" :width="300" :height="200" />
       </template>
@@ -28,11 +28,3 @@ const props = defineProps({
   bio: { type: String },
 })
 </script>
-
-<style lang="scss" scoped>
-.user-card {
-  width: 300px;
-  cursor: pointer;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-}
-</style>

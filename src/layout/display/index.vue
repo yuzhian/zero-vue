@@ -1,6 +1,9 @@
 <template>
-  <a-layout-header class="layout-header">
-    <div class="logo" @click="$router.push('/')" />
+  <a-layout-header class="fixed w-screen flex z-999 bg-[#000000cc] backdrop-saturate-[180%] backdrop-blur-xl backdrop-filter select-none">
+    <router-link to="/">
+      <div class="float-left w-120px h-32px mt-16px bg-[#ffffff33] cursor-pointer"></div>
+    </router-link>
+
     <router-menus :routes="menus" theme="dark">
       <template #rightPanel>
         <a-button ghost @click="$router.push('/dashboard')">
@@ -10,11 +13,11 @@
     </router-menus>
   </a-layout-header>
 
-  <a-layout-content class="layout-content">
+  <a-layout-content>
     <router-view />
   </a-layout-content>
 
-  <a-layout-footer class="layout-footer">Ant Design ©2018 Created by Ant UED</a-layout-footer>
+  <a-layout-footer class="text-center">Ant Design ©2018 Created by Ant UED</a-layout-footer>
 </template>
 
 <script setup>
@@ -26,27 +29,3 @@ import routes from '@/router/display'
 
 const menus = routes.filter(({ path, meta: { hidden } }) => path !== '/' && !hidden)
 </script>
-
-<style lang="scss" scoped>
-.layout-header {
-  position: fixed;
-  z-index: 100;
-  width: 100vw;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  background: #000000cc;
-
-  .logo {
-    width: 120px;
-    height: 32px;
-    background: #ffffff33;
-    margin: 16px 24px 16px 0;
-    float: left;
-    cursor: pointer;
-  }
-}
-.layout-footer {
-  text-align: center;
-}
-</style>

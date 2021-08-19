@@ -5,6 +5,8 @@ import router from './router'
 import antdv from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 
+import 'virtual:windi.css'
+
 import { makeServer } from './mock/server'
 import { registerComponents } from './plugins/components'
 
