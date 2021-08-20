@@ -10,9 +10,14 @@
     <!-- 右侧 -->
     <div>
       <!-- 按钮组 -->
-      <a-tooltip v-for="({text, icon, cls, trigger, handler}, index) in rButtons" :key="index" placement="topLeft" :title="text">
-        <component :is="icon" class="m-2 text-xl leading-0 text-gray-300 active:rotate-180 transform duration-200" :class="cls" @[trigger]="handler" />
-      </a-tooltip>
+      <component
+        v-for="({ icon, cls, trigger, handler }, index) in rButtons"
+        :key="index"
+        :is="icon"
+        class="m-2 text-xl leading-0 text-gray-300 active:rotate-180 transform duration-200"
+        :class="cls"
+        @[trigger]="handler"
+      />
       <!-- 头像框 -->
       <a-dropdown :trigger="['hover']" :overlayStyle="{ position: 'absolute' }">
         <a-avatar :src="userinfo.avatar" :style="{ cursor: 'pointer' }" />
@@ -23,23 +28,28 @@
     </div>
   </a-layout-header>
 
+  <!-- 侧栏 -->
   <a-layout-sider class="absolute overflow-auto left-0 bottom-0 h-[calc(100vh-64px)] w-200px bg-gray-100">
     <router-menus :routes="menus" />
   </a-layout-sider>
 
+  <!-- 主体 -->
   <a-layout-content class="absolute overflow-auto right-0 bottom-0 h-[calc(100vh-64px)] w-[calc(100vw-200px)] p-4 bg-gray-100">
     <router-view :key="$route.fullPath" v-if="routerAlive" />
   </a-layout-content>
 </template>
 
 <script setup>
-import { nextTick } from 'vue'
-import { SettingOutlined, AppstoreOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
+import { nextTick, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { SettingOutlined, HeatMapOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
 
 import RouterMenus from '@/components/RouterMenus.vue'
 import UserCard from '@/components/UserCard.vue'
 
 import routes from '/src/router/console'
+
+const router = useRouter()
 
 // 菜单项
 const menus = routes.filter(({ path, meta }) => path !== '/dashboard' && (!meta || !meta.hidden))
@@ -52,18 +62,18 @@ const userinfo = {
   bio: '法外狂徒张三',
 }
 
-// 重载组件
-let routerAlive = true
-const reloadRoute = () => {
-  routerAlive = false
-  nextTick(() => (routerAlive = true))
+// reload component
+let routerAlive = ref(true)
+const refreshComponent = () => {
+  routerAlive.value = false
+  nextTick(() => (routerAlive.value = true))
 }
 
 // 顶栏右侧按钮
 const rButtons = [
-  { text: '刷新', icon: SyncOutlined, handler: reloadRoute, trigger: 'click', cls: '' },
+  { text: '首页', icon: HeatMapOutlined, handler: () => router.push('/'), trigger: 'click', cls: '' },
+  { text: '刷新', icon: SyncOutlined, handler: () => refreshComponent(), trigger: 'click', cls: '' },
   { text: '设置', icon: SettingOutlined, handler: '', trigger: '', cls: '' },
   { text: '消息', icon: MessageOutlined, handler: '', trigger: '', cls: '' },
-  { text: '工具箱', icon: AppstoreOutlined, handler: '', trigger: '', cls: '' },
 ]
 </script>

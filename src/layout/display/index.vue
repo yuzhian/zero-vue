@@ -4,7 +4,7 @@
       <div class="float-left w-120px h-32px mt-16px bg-[#ffffff33] cursor-pointer"></div>
     </router-link>
 
-    <router-menus :routes="menus" theme="dark">
+    <router-menus :routes="menus">
       <template #rightPanel>
         <a-button ghost @click="$router.push('/dashboard')">
           <DashboardOutlined />控制台
@@ -27,5 +27,5 @@ import RouterMenus from '@/components/RouterMenus.vue'
 
 import routes from '@/router/display'
 
-const menus = routes.filter(({ path, meta: { hidden } }) => path !== '/' && !hidden)
+const menus = routes.filter(({ path, meta }) => path !== '/' && (!meta || !meta.hidden))
 </script>

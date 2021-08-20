@@ -1,5 +1,5 @@
 <template>
-  <a-menu :theme="theme" :mode="mode" class="router-tree select-none leading-64px bg-transparent" v-model:selectedKeys="current">
+  <z-menu :theme="theme" :mode="mode" v-model:selectedKeys="current">
     <a-menu-item v-for="({ name, path, meta }) of routes" :key="path" @click="$router.push(path)">
       <component v-if="meta && meta.icon" :is="antIcons[meta.icon]" />
       <component v-else :is="antIcons['BorderOuterOutlined']" />
@@ -8,7 +8,7 @@
     <div style="float: right;">
       <slot name="rightPanel" />
     </div>
-  </a-menu>
+  </z-menu>
 </template>
 
 <script setup>
@@ -29,13 +29,3 @@ onBeforeRouteUpdate((to) => {
   current[0] = to.path
 })
 </script>
-
-<style scoped>
-.bg-transparent {
-  background: #ffffff00;
-}
-
-.ant-menu-item-selected {
-  background-color: rgba(255, 255, 255, 0.2) !important;
-}
-</style>
