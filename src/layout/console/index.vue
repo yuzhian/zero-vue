@@ -14,10 +14,11 @@
         v-for="({ icon, cls, trigger, handler }, index) in rButtons"
         :key="index"
         :is="icon"
-        class="m-2 text-xl leading-0 text-gray-300 active:rotate-180 transform duration-200"
+        class="m-2 text-xl leading-0 text-gray-300 active:rotate-360 transform duration-200"
         :class="cls"
         @[trigger]="handler"
       />
+
       <!-- 头像框 -->
       <a-dropdown :trigger="['hover']" :overlayStyle="{ position: 'absolute' }">
         <a-avatar :src="userinfo.avatar" :style="{ cursor: 'pointer' }" />
@@ -30,7 +31,7 @@
 
   <!-- 侧栏 -->
   <a-layout-sider class="absolute overflow-auto left-0 bottom-0 h-[calc(100vh-64px)] w-200px bg-gray-100">
-    <router-menus :routes="menus" />
+    <router-menu mode="inline" :routes="menus" />
   </a-layout-sider>
 
   <!-- 主体 -->
@@ -44,7 +45,7 @@ import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { SettingOutlined, HeatMapOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
 
-import RouterMenus from '@/components/RouterMenus.vue'
+import RouterMenu from '@/components/RouterMenu.vue'
 import UserCard from '@/components/UserCard.vue'
 
 import routes from '/src/router/console'

@@ -4,13 +4,11 @@
       <div class="float-left w-120px h-32px mt-16px bg-[#ffffff33] cursor-pointer"></div>
     </router-link>
 
-    <router-menus :routes="menus">
-      <template #rightPanel>
-        <a-button ghost @click="$router.push('/dashboard')">
-          <DashboardOutlined />控制台
-        </a-button>
-      </template>
-    </router-menus>
+    <router-link class="absolute right-4" to="/dashboard">
+      <a-button ghost>
+        <DashboardOutlined />控制台
+      </a-button>
+    </router-link>
   </a-layout-header>
 
   <a-layout-content>
@@ -23,7 +21,7 @@
 <script setup>
 import { DashboardOutlined } from '@ant-design/icons-vue'
 
-import RouterMenus from '@/components/RouterMenus.vue'
+import RouterMenu from '@/components/RouterMenu.vue'
 
 import routes from '@/router/display'
 

@@ -8,22 +8,22 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '控制台' },
   },
   {
-    path: '/demo/full',
-    name: 'Demo1',
+    path: '/console/full',
+    name: 'ConosleFull',
     component: () => import('@/views/common/PreRoute.vue'),
-    meta: { title: '测试页1', icon: 'TrophyOutlined' },
+    meta: { title: 'ConosleFull Page', icon: 'TrophyOutlined' },
   },
   {
-    path: '/demo/hidden',
-    name: 'Demo2',
+    path: '/console/hidden',
+    name: 'ConsoleHidden',
     component: () => import('@/views/common/PreRoute.vue'),
     meta: {
-      title: '测试页2',
+      title: 'ConsoleHidden Page',
       hidden: true,
     },
   },
   {
-    path: '/demo/no-name-and-meta',
+    path: '/console/no-name-and-meta',
     component: () => import('@/views/common/PreRoute.vue'),
   },
 ]
