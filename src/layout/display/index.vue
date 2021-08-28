@@ -20,10 +20,4 @@
 
 <script setup>
 import { DashboardOutlined } from '@ant-design/icons-vue'
-
-import RouterMenu from '@/components/RouterMenu.vue'
-
-import routes from '@/router/display'
-
-const menus = routes.filter(({ path, meta }) => path !== '/' && (!meta || !meta.hidden))
 </script>

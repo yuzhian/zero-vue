@@ -30,8 +30,8 @@
   </a-layout-header>
 
   <!-- 侧栏 -->
-  <a-layout-sider class="absolute overflow-auto left-0 bottom-0 h-[calc(100vh-64px)] w-200px bg-gray-100">
-    <router-menu mode="inline" :routes="menus" />
+  <a-layout-sider class="absolute overflow-x-hidden left-0 bottom-0 h-[calc(100vh-64px)] bg-gray-100">
+    <route-menu mode="inline" :routes="menus" />
   </a-layout-sider>
 
   <!-- 主体 -->
@@ -45,7 +45,7 @@ import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { SettingOutlined, HeatMapOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
 
-import RouterMenu from '@/components/RouterMenu.vue'
+import RouteMenu from './menu/RouteMenu.jsx'
 import UserCard from '@/components/UserCard.vue'
 
 import routes from '/src/router/console'

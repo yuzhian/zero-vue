@@ -1,4 +1,4 @@
-import { RouteRecordRaw } from 'vue-router'
+import { RouteRecordRaw, RouterView } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -25,6 +25,37 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/console/no-name-and-meta',
     component: () => import('@/views/common/PreRoute.vue'),
+  },
+  {
+    path: 'level1',
+    name: 'level1',
+    component: RouterView,
+    children: [
+      {
+        path: '/level2',
+        name: 'level2',
+        component: RouterView,
+        children: [
+          {
+            path: 'level3',
+            name: 'level3',
+            component: RouterView,
+            children: [
+              {
+                path: 'level4',
+                name: 'level4',
+                component: () => import('@/views/common/PreRoute.vue'),
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'https://www.baidu.com',
+    component: () => import('@/views/common/PreRoute.vue'),
+    meta: { title: '百度', icon: 'SearchOutlined' },
   },
 ]
 
