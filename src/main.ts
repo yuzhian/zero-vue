@@ -16,4 +16,4 @@ if (import.meta.env.MODE === 'development') {
 
 const app = createApp(App).use(router).use(antdv)
 registerComponents(app)
-app.mount('body')
+app.mount('#app')
