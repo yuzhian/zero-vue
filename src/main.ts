@@ -10,9 +10,9 @@ import 'virtual:windi.css'
 import { makeServer } from './mock/server'
 import { registerComponents } from './plugins/components'
 
-if (import.meta.env.MODE === 'development') {
-  makeServer()
-}
+// if (import.meta.env.MODE === 'development') {
+//   makeServer()
+// }
 
 const app = createApp(App).use(router).use(antdv)
 registerComponents(app)

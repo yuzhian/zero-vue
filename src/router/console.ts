@@ -27,6 +27,10 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/common/PreRoute.vue'),
   },
   {
+    path: '/demo/pagination/table',
+    component: () => import('@/views/demo/pagination/Table.vue'),
+  },
+  {
     path: 'level1',
     name: 'level1',
     component: RouterView,
