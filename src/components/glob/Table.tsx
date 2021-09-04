@@ -1,10 +1,34 @@
-<script lang="jsx">
+import { defineComponent } from 'vue'
+
+interface TableProps {
+  // 列
+  columns: Array<any>
+  // 分页
+  pagination: Object
+  // 表格行 key 的取值
+  rowKey: 'id'
+  // 请求函数
+  fetch: Function
+  // 是否懒加载
+  lazy: Boolean
+  // 参数
+  params: Object
+  // 序号, 标题
+  rowNo: Boolean | String
+  // 复选框
+  rowSelection: Boolean | Object
+}
+
 /**
  * 在支持 antdv table 组件所有功能的前提下扩展
  * - 自动组装查询项, 拉取数据, 处理结果集(由父组件提供请求函数和结果集映射)
  * - 常用附加列配置, 并使用 props 参数控制
  */
-export default {
+export default defineComponent({
+  // setup(props, { attrs, slots, emit }) {
+  //   console.log(props, attrs, slots, emit)
+  //   return () => <div></div>
+  // },
   props: {
     // antdv
     columns: { type: Array, default: () => [] },
@@ -20,16 +44,14 @@ export default {
   render() {
     return (
       <a-table
-        props={{
-          ...this.$attrs,
-          onChange: this.handleConditionChange,
-          dataSource: this.dataSource,
-          pagination: this.paginationData,
-          columns: this.computedColumns,
-          rowSelection: this.computedRowSelection,
-          rowKey: (item, index) => item[this.rowKey] || index,
-        }}
-        slots={this.$slots}
+        v-slots={this.$slots}
+        attrs={this.$attrs}
+        onChange={this.handleConditionChange}
+        dataSource={this.dataSource}
+        pagination={this.paginationData}
+        columns={this.computedColumns}
+        rowSelection={this.computedRowSelection}
+        rowKey={(item, index) => item[this.rowKey] || index}
       />
     )
   },
@@ -58,7 +80,7 @@ export default {
         columns.push({
           title: typeof this.rowNo === 'string' ? this.rowNo : '序号',
           width: 60,
-          customRender: (t, r, i) => parseInt(i) + 1,
+          customRender: ({ index }) => parseInt(index) + 1,
         })
       columns.push.apply(columns, this.columns)
       return columns
@@ -86,7 +108,7 @@ export default {
         ...this.filters,
         ...this.sorter,
         ...this.params,
-      }).then((resp) => {
+      }).then(resp => {
         this.dataSource = resp[import.meta.env.VITE_APP_PAGINATION_RESULTS]
         this.paginationData.current = resp[import.meta.env.VITE_APP_PAGINATION_CURRENT]
         this.paginationData.total = resp[import.meta.env.VITE_APP_PAGINATION_TOTAL]
@@ -105,5 +127,4 @@ export default {
       this.$emit('selection-change', selectedRowKeys, selectedRows)
     },
   },
-}
-</script>
+})

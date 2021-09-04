@@ -1,31 +1,26 @@
 <template>
-  <a-row>
-    <a-col :span="12">
-      <!-- 表格 -->
-      <z-table
-        ref="fullTable"
-        :fetch="queryFunc"
-        :lazy="true"
-        :params="params"
-        row-no="编号"
-        row-selection
-        :columns="columns"
-        :row-key="rowKey"
-        bordered
-        :pagination="{ pageSize: 30 }"
-        :locale="{ emptyText: '无数据' }"
-        @selection-change="info"
-      >
-        <template #action="text, record">
-          <a-button type="link" @click="info(record[rowKey])">编辑</a-button>
-        </template>
-      </z-table>
-      <a-button v-if="btn" block @click="loadData">加载表格数据</a-button>
-    </a-col>
-    <a-col :span="12">
-      <z-table :fetch="queryFunc" :columns="columns.slice(0, columns.length - 1)" />
-    </a-col>
-  </a-row>
+  <div>复杂表格</div>
+  <z-table
+    ref="fullTable"
+    :fetch="queryFunc"
+    :lazy="true"
+    :params="params"
+    row-no="编号"
+    row-selection
+    :columns="columns"
+    :row-key="rowKey"
+    bordered
+    :pagination="{ pageSize: 30 }"
+    :locale="{ emptyText: '无数据' }"
+    @selection-change="info"
+  >
+    <template #action="{record}">
+      <a-button type="link" @click="info(record[rowKey])">编辑</a-button>
+    </template>
+  </z-table>
+  <a-button v-if="btn" block @click="loadData">加载表格数据</a-button>
+  <div>简单表格</div>
+  <z-table :fetch="queryFunc" :columns="columns.slice(0, columns.length - 1)" />
 </template>
 
 <script>
@@ -52,7 +47,7 @@ export default {
         align: 'center',
         fixed: 'right',
         width: 147,
-        scopedSlots: { customRender: 'action' },
+        slots: { customRender: 'action' },
       },
     ],
     rowKey: '_id',
