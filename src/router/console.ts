@@ -17,38 +17,37 @@ const routes: RouteRecordRaw[] = [
     path: '/console/hidden',
     name: 'ConsoleHidden',
     component: () => import('@/views/common/PreRoute.vue'),
-    meta: {
-      title: 'ConsoleHidden Page',
-      hidden: true,
-    },
+    meta: { title: 'ConsoleHidden Page', hidden: true },
   },
   {
     path: '/console/no-name-and-meta',
     component: () => import('@/views/common/PreRoute.vue'),
   },
+  // 演示功能 start
   {
-    path: '/demo/pagination/table',
-    component: () => import('@/views/demo/pagination/Table.vue'),
-  },
-  {
-    path: 'level1',
-    name: 'level1',
+    path: '/demo/components',
     component: RouterView,
+    meta: { title: '组件演示', icon: 'AppstoreOutlined' },
     children: [
       {
-        path: '/level2',
-        name: 'level2',
+        path: 'pagination',
         component: RouterView,
+        meta: { title: '分页' },
         children: [
           {
-            path: 'level3',
-            name: 'level3',
+            path: 'table',
             component: RouterView,
+            meta: { title: '表格' },
             children: [
               {
-                path: 'level4',
-                name: 'level4',
-                component: () => import('@/views/common/PreRoute.vue'),
+                path: 'simple',
+                component: () => import('@/views/demo/components/pagination/table/Simple.vue'),
+                meta: { title: '简单表格' },
+              },
+              {
+                path: 'full',
+                component: () => import('@/views/demo/components/pagination/table/Full.vue'),
+                meta: { title: '复杂表格' },
               },
             ],
           },
@@ -57,10 +56,11 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: 'https://www.baidu.com',
-    component: () => import('@/views/common/PreRoute.vue'),
-    meta: { title: '百度', icon: 'SearchOutlined' },
+    path: 'https://github.com/yuzhian/zero-vue',
+    component: RouterView,
+    meta: { title: 'Github', icon: 'GithubOutlined' },
   },
+  // 演示功能 end
 ]
 
 export default routes

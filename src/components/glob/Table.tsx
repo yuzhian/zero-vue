@@ -1,23 +1,5 @@
 import { defineComponent } from 'vue'
-
-interface TableProps {
-  // 列
-  columns: Array<any>
-  // 分页
-  pagination: Object
-  // 表格行 key 的取值
-  rowKey: 'id'
-  // 请求函数
-  fetch: Function
-  // 是否懒加载
-  lazy: Boolean
-  // 参数
-  params: Object
-  // 序号, 标题
-  rowNo: Boolean | String
-  // 复选框
-  rowSelection: Boolean | Object
-}
+import { PaginationProps } from 'ant-design-vue'
 
 /**
  * 在支持 antdv table 组件所有功能的前提下扩展
@@ -25,65 +7,34 @@ interface TableProps {
  * - 常用附加列配置, 并使用 props 参数控制
  */
 export default defineComponent({
-  // setup(props, { attrs, slots, emit }) {
-  //   console.log(props, attrs, slots, emit)
-  //   return () => <div></div>
-  // },
   props: {
-    // antdv
-    columns: { type: Array, default: () => [] },
-    pagination: { type: Object, default: () => ({}) },
-    rowKey: { type: String, default: 'id' },
-    // custom
-    fetch: { type: Function, required: true },
-    lazy: { type: Boolean, default: false },
-    params: { type: Object, default: () => ({}) },
-    rowNo: { type: [Boolean, String] }, // 序号, 标题
+    // 覆写 antdv 属性
+    columns: { type: Array, default: () => [] }, // 显示列
+    pagination: { type: Object, default: () => ({}) }, // 分页参数
+    rowKey: { type: String, default: import.meta.env.VITE_ROWKEY_DEFAULT }, // 操作项标记列名, 多选等操作以此列数据返回
     rowSelection: { type: [Boolean, Object] }, // 复选框, 选项
-  },
-  render() {
-    return (
-      <a-table
-        v-slots={this.$slots}
-        attrs={this.$attrs}
-        onChange={this.handleConditionChange}
-        dataSource={this.dataSource}
-        pagination={this.paginationData}
-        columns={this.computedColumns}
-        rowSelection={this.computedRowSelection}
-        rowKey={(item, index) => item[this.rowKey] || index}
-      />
-    )
+    // 自定义属性
+    fetch: { type: Function, required: true }, // 请求函数
+    params: { type: Object, default: () => ({}) }, // 参数
+    showNo: { type: [Boolean, String] }, // 序号, 标题
   },
   data() {
     return {
-      // 结果集
-      dataSource: [],
-      selectedRowKeys: [],
-      // 分页参数
-      paginationData: {
-        total: 0,
-        current: 1,
-        pageSize: 20,
-        ...this.pagination,
-      },
-      // 过滤参数
-      filters: {},
-      // 排序参数
-      sorter: {},
+      records: [] as Array<any>, // 结果集
+      selectedRowKeys: [] as Array<string>, // 已选
+      paginationData: { total: 0, current: 1, pageSize: 20, ...this.pagination } as PaginationProps, // 分页参数
+      filters: [] as object[], // 过滤参数
+      sorter: {}, // 排序参数
     }
   },
   computed: {
     computedColumns() {
-      let columns = []
-      this.rowNo &&
-        columns.push({
-          title: typeof this.rowNo === 'string' ? this.rowNo : '序号',
-          width: 60,
-          customRender: ({ index }) => parseInt(index) + 1,
-        })
-      columns.push.apply(columns, this.columns)
-      return columns
+      let pres = []
+      if (this.showNo) {
+        const title: string = typeof this.showNo === 'string' ? this.showNo : '#'
+        pres.push({ title, width: `${2.5 + title.length}em`, customRender: ({ index }: any) => parseInt(index) + 1 })
+      }
+      return [...pres, ...this.columns]
     },
     computedRowSelection() {
       if (!this.rowSelection) return
@@ -92,39 +43,46 @@ export default defineComponent({
         selectedRowKeys: this.selectedRowKeys,
         onChange: this.handleSelectionChange,
       }
-      return typeof this.rowSelection === 'boolean' ? overlay : { ...this.rowSelection, ...overlay }
+      return typeof this.rowSelection === 'boolean' ? overlay : { ...Object(this.rowSelection), ...overlay }
     },
   },
+  render() {
+    return (
+      <a-table
+        dataSource={this.records}
+        columns={this.computedColumns}
+        pagination={this.paginationData}
+        rowKey={(item: any, index: number) => item[this.rowKey] || index}
+        rowSelection={this.computedRowSelection}
+        attrs={this.$attrs}
+        v-slots={this.$slots}
+        onChange={this.handleConditionChange}
+      />
+    )
+  },
   created() {
-    if (!this.lazy) {
-      this.handleFetch()
-    }
+    this.handleFetch()
   },
   methods: {
     // 查询
     handleFetch() {
-      this.fetch({
-        ...this.paginationData,
-        ...this.filters,
-        ...this.sorter,
-        ...this.params,
-      }).then(resp => {
-        this.dataSource = resp[import.meta.env.VITE_APP_PAGINATION_RESULTS]
-        this.paginationData.current = resp[import.meta.env.VITE_APP_PAGINATION_CURRENT]
-        this.paginationData.total = resp[import.meta.env.VITE_APP_PAGINATION_TOTAL]
+      this.fetch({ ...this.paginationData, ...this.filters, ...this.sorter, ...this.params }).then((resp: any) => {
+        this.records = resp[import.meta.env.VITE_PAGINATION_RESULTS as string] as any[]
+        this.paginationData.current = resp[import.meta.env.VITE_PAGINATION_CURRENT as string] as number
+        this.paginationData.total = resp[import.meta.env.VITE_PAGINATION_TOTAL as string] as number
       })
     },
     // 处理 分页 过滤 排序 条件变化
-    handleConditionChange(pagination, filters, { field, order }) {
+    handleConditionChange(pagination: PaginationProps, filters: Object[], { field, order }: any) {
       this.paginationData = pagination
       this.filters = filters
       this.sorter = { field, order }
       this.handleFetch()
     },
     // 处理 复选框 变化
-    handleSelectionChange(selectedRowKeys, selectedRows) {
+    handleSelectionChange(selectedRowKeys: string[], selectedRows: string[]) {
       this.selectedRowKeys = selectedRowKeys
-      this.$emit('selection-change', selectedRowKeys, selectedRows)
+      this.$emit('selectionChange', selectedRowKeys, selectedRows)
     },
   },
 })

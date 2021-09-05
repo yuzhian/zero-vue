@@ -1,11 +1,10 @@
 <template>
-  <div>复杂表格</div>
   <z-table
     ref="fullTable"
     :fetch="queryFunc"
     :lazy="true"
     :params="params"
-    row-no="编号"
+    show-no="编号"
     row-selection
     :columns="columns"
     :row-key="rowKey"
@@ -18,9 +17,6 @@
       <a-button type="link" @click="info(record[rowKey])">编辑</a-button>
     </template>
   </z-table>
-  <a-button v-if="btn" block @click="loadData">加载表格数据</a-button>
-  <div>简单表格</div>
-  <z-table :fetch="queryFunc" :columns="columns.slice(0, columns.length - 1)" />
 </template>
 
 <script>
@@ -31,17 +27,17 @@ export default {
     queryFunc: listAndroidArticle,
     params: { str: 'abc', arr: [1, 2, 3] },
     columns: [
-      { title: 'title', dataIndex: 'title', sorter: true },
+      { title: '标题', dataIndex: 'title', sorter: true },
       {
-        title: 'type',
+        title: '类型',
         dataIndex: 'type',
         filters: [
           { text: '安卓', value: 'Android' },
           { text: '前端', value: 'FrontEnd' },
         ],
       },
-      { title: 'author', dataIndex: 'author' },
-      { title: 'views', dataIndex: 'views' },
+      { title: '作者', dataIndex: 'author' },
+      { title: '访问量', dataIndex: 'views' },
       {
         title: '操作',
         align: 'center',
@@ -51,15 +47,11 @@ export default {
       },
     ],
     rowKey: '_id',
-    btn: true,
   }),
   methods: {
     info(...items) {
-      this.$message.info(JSON.stringify(items))
-    },
-    loadData() {
-      this.$refs.fullTable.handleFetch()
-      this.btn = false
+      console.log(items)
+      this.$message.info('已输出到控制台')
     },
   },
 }
