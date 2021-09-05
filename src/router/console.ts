@@ -7,23 +7,41 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/console/dashboard/index.vue'),
     meta: { title: '控制台' },
   },
-  {
-    path: '/console/full',
-    name: 'ConosleFull',
-    component: () => import('@/views/common/PreRoute.vue'),
-    meta: { title: 'ConosleFull Page', icon: 'TrophyOutlined' },
-  },
-  {
-    path: '/console/hidden',
-    name: 'ConsoleHidden',
-    component: () => import('@/views/common/PreRoute.vue'),
-    meta: { title: 'ConsoleHidden Page', hidden: true },
-  },
-  {
-    path: '/console/no-name-and-meta',
-    component: () => import('@/views/common/PreRoute.vue'),
-  },
   // 演示功能 start
+  {
+    path: '/demo/route',
+    component: RouterView,
+    meta: { title: '路由及菜单演示', icon: 'NumberOutlined' },
+    children: [
+      {
+        path: 'relative-path',
+        name: 'RelativePath',
+        component: () => import('@/views/demo/route/PreRoute.vue'),
+        meta: { title: '相对路径' },
+      },
+      {
+        path: '/absolute-path',
+        name: 'AbsolutePath',
+        component: () => import('@/views/demo/route/PreRoute.vue'),
+        meta: { title: '绝对路径' },
+      },
+      {
+        path: 'hidden',
+        name: 'Hidden',
+        component: () => import('@/views/demo/route/PreRoute.vue'),
+        meta: { title: '隐藏页', hidden: true },
+      },
+      {
+        path: 'no-meta',
+        name: 'NoMeta',
+        component: () => import('@/views/demo/route/PreRoute.vue'),
+      },
+      {
+        path: 'no-name-and-meta',
+        component: () => import('@/views/demo/route/PreRoute.vue'),
+      },
+    ],
+  },
   {
     path: '/demo/components',
     component: RouterView,

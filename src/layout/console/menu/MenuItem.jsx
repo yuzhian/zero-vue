@@ -20,6 +20,8 @@ function pathResolve(parentPath, currentPath) {
 const MenuItem = {
   setup(props, { attrs, slots, emit }) {
     const { menu, 'parent-path': parentPath } = attrs
+    const hidden = menu.meta && menu.meta.hidden
+    if (hidden) return () => undefined
     const routePath = pathResolve(parentPath, menu.path)
     const title = (menu.meta && menu.meta.title) || menu.name || menu.path
     const icon = isTopRoute(parentPath) ? h(antIcons[(menu.meta && menu.meta.icon) || 'BorderOuterOutlined']) : ''
