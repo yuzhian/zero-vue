@@ -40,6 +40,11 @@ const routes: RouteRecordRaw[] = [
         path: 'no-name-and-meta',
         component: () => import('@/views/demo/route/PreRoute.vue'),
       },
+      {
+        path: 'https://github.com/yuzhian/zero-vue',
+        component: RouterView,
+        meta: { title: '外链', icon: 'GithubOutlined' },
+      },
     ],
   },
   {
@@ -72,11 +77,6 @@ const routes: RouteRecordRaw[] = [
         ],
       },
     ],
-  },
-  {
-    path: 'https://github.com/yuzhian/zero-vue',
-    component: RouterView,
-    meta: { title: 'Github', icon: 'GithubOutlined' },
   },
   // 演示功能 end
 ]

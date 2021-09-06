@@ -45,7 +45,7 @@ import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { SettingOutlined, HeatMapOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
 
-import RouteMenu from './menu/RouteMenu.jsx'
+import RouteMenu from '@/components/RouteMenu.jsx'
 import UserCard from '@/components/UserCard.vue'
 
 import routes from '/src/router/console'
