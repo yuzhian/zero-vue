@@ -1,4 +1,7 @@
 import Axios from 'axios'
+import store from '../store'
+
+const TOKEN_KEY = 'token'
 
 const service = Axios.create({
   baseURL: import.meta.env.BASE_URL,
@@ -8,7 +11,7 @@ const service = Axios.create({
 
 service.interceptors.request.use(
   config => {
-    config.headers['token'] = localStorage.getItem('token')
+    config.headers[TOKEN_KEY] = store.state.account.token 
     return config
   },
   error => {

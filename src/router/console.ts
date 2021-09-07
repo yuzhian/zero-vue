@@ -11,7 +11,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/route',
     component: RouterView,
-    meta: { title: '路由及菜单演示', icon: 'NumberOutlined' },
+    meta: { title: '路由及菜单演示', icon: 'ClusterOutlined' },
     children: [
       {
         path: 'relative-path',
@@ -44,6 +44,18 @@ const routes: RouteRecordRaw[] = [
         path: 'https://github.com/yuzhian/zero-vue',
         component: RouterView,
         meta: { title: '外链', icon: 'GithubOutlined' },
+      },
+    ],
+  },
+  {
+    path: '/demo/store',
+    component: RouterView,
+    meta: { title: '状态管理', icon: 'FileSyncOutlined' },
+    children: [
+      {
+        path: 'userinfo',
+        meta: { title: '用户信息' },
+        component: () => import('@/views/demo/store/Userinfo.vue'),
       },
     ],
   },

@@ -10,13 +10,13 @@ const router: RouteRecordRaw[] = [
   {
     path: '/display/full',
     name: 'DisplayFull',
-    component: () => import('@/views/common/PreRoute.vue'),
+    component: () => import('@/views/demo/route/PreRoute.vue'),
     meta: { title: 'DisplayFull Page', icon: 'TrophyOutlined' },
   },
   {
     path: '/display/hidden',
     name: 'DisplayHidden',
-    component: () => import('@/views/common/PreRoute.vue'),
+    component: () => import('@/views/demo/route/PreRoute.vue'),
     meta: {
       title: 'DisplayHidden Page',
       hidden: true,
@@ -24,7 +24,7 @@ const router: RouteRecordRaw[] = [
   },
   {
     path: '/display/no-name-and-meta',
-    component: () => import('@/views/common/PreRoute.vue'),
+    component: () => import('@/views/demo/route/PreRoute.vue'),
   },
 ]
 
