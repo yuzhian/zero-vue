@@ -31,11 +31,11 @@ export const MenuItem = {
     if (hidden) return () => null
     const routePath = pathResolve(parentPath, route.path)
     const title = (route.meta && route.meta.title) || route.name || route.path
+    const icon = isTopRoute(parentPath) ? h(antIcons[(route.meta && route.meta.icon) || 'NumberOutlined']) : ''
 
     if (route.children) {
-      const icon = isTopRoute(parentPath) ? h(antIcons[(route.meta && route.meta.icon) || 'BorderOuterOutlined']) : ''
       return () => (
-        <a-sub-menu key={routePath} v-slots={{ icon: () => icon, title: () => title }}>
+        <a-sub-menu key={routePath} icon={icon} title={title}>
           {route.children.map((v, i) => (
             <MenuItem key={i} route={v} parent-path={routePath} />
           ))}
@@ -50,7 +50,11 @@ export const MenuItem = {
     ) : (
       <router-link to={routePath}>{title}</router-link>
     )
-    return () => <a-menu-item key={routePath}>{content}</a-menu-item>
+    return () => (
+      <a-menu-item key={routePath} icon={icon}>
+        {content}
+      </a-menu-item>
+    )
   },
 }
 

@@ -5,13 +5,13 @@ const routes: RouteRecordRaw[] = [
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('@/views/console/dashboard/index.vue'),
-    meta: { title: '控制台' },
+    meta: { title: '控制台', icon: 'SafetyCertificateOutlined' },
   },
   // 演示功能 start
   {
     path: '/demo/route',
     component: RouterView,
-    meta: { title: '路由及菜单演示', icon: 'ClusterOutlined' },
+    meta: { title: '路由菜单', icon: 'LayoutOutlined' },
     children: [
       {
         path: 'relative-path',
@@ -50,7 +50,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/store',
     component: RouterView,
-    meta: { title: '状态管理', icon: 'FileSyncOutlined' },
+    meta: { title: '状态管理', icon: 'HeartOutlined' },
     children: [
       {
         path: 'userinfo',
@@ -62,7 +62,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/components',
     component: RouterView,
-    meta: { title: '组件演示', icon: 'AppstoreOutlined' },
+    meta: { title: '组件演示', icon: 'InboxOutlined' },
     children: [
       {
         path: 'pagination',
@@ -87,6 +87,23 @@ const routes: RouteRecordRaw[] = [
             ],
           },
         ],
+      },
+    ],
+  },
+  {
+    path: '/demo/directives',
+    component: RouterView,
+    meta: { title: '指令演示' ,icon: 'FireOutlined'},
+    children: [
+      {
+        path: 'focus',
+        component: () => import('@/views/demo/directives/Focus.vue'),
+        meta: { title: '聚焦指令' },
+      },
+      {
+        path: 'contextmenu',
+        component: () => import('@/views/demo/directives/Contextmenu.vue'),
+        meta: { title: '菜单指令' },
       },
     ],
   },
