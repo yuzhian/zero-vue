@@ -1,11 +1,23 @@
 import { h, reactive } from 'vue'
-import * as antIcons from '@ant-design/icons-vue'
-
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import * as antIcons from '@ant-design/icons-vue'
 
 import routes from '@/router/console.ts'
 
 import '@/assets/antMenu.css'
+
+/**
+ * 当前路由菜单对应的完整路由地址
+ *
+ * @param {string} parentPath 上级完整路径
+ * @param {string} currentPath 当前路径
+ * @returns 当前完整路径
+ */
+function completePath(parentPath, currentPath) {
+  if (isExternalLink(currentPath)) return currentPath
+  else if (currentPath.startsWith('/')) return currentPath
+  return (parentPath.endsWith('/') ? parentPath : parentPath + '/') + currentPath
+}
 
 function isTopRoute(parentPath) {
   return ['', '/'].indexOf(parentPath) >= 0
@@ -15,44 +27,40 @@ function isExternalLink(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
 
-function pathResolve(parentPath, currentPath) {
-  if (isExternalLink(currentPath)) return currentPath
-  else if (currentPath.startsWith('/')) return currentPath
-  return (parentPath.endsWith('/') ? parentPath : parentPath + '/') + currentPath
-}
-
 /**
- * 子项
+ * 子菜单组件树递归生成
  */
 export const MenuItem = {
-  setup(props, { attrs, slots, emit }) {
-    const { route, 'parent-path': parentPath } = attrs
-    const hidden = route.meta && route.meta.hidden
-    if (hidden) return () => null
-    const routePath = pathResolve(parentPath, route.path)
-    const title = (route.meta && route.meta.title) || route.name || route.path
-    const icon = isTopRoute(parentPath) ? h(antIcons[(route.meta && route.meta.icon) || 'NumberOutlined']) : ''
+  props: { route: Object, parentPath: String },
+  setup({ route: { path, name, children, meta }, parentPath }) {
+    if (meta?.hidden) return () => null
 
-    if (route.children) {
+    const routePath = completePath(parentPath, path)
+    const title = meta?.title || name || path
+    const icon = isTopRoute(parentPath) ? h(antIcons[meta?.icon || 'NumberOutlined']) : ''
+
+    // 菜单目录
+    if (children) {
       return () => (
         <a-sub-menu key={routePath} icon={icon} title={title}>
-          {route.children.map((v, i) => (
+          {children.map((v, i) => (
             <MenuItem key={i} route={v} parent-path={routePath} />
           ))}
         </a-sub-menu>
       )
     }
 
-    const content = isExternalLink(route.path) ? (
-      <a href={routePath} target='_black'>
-        {title}
-      </a>
-    ) : (
-      <router-link to={routePath}>{title}</router-link>
-    )
+    // 底层菜单
     return () => (
       <a-menu-item key={routePath} icon={icon}>
-        {content}
+        {isExternalLink(path) ? (
+          // 外链处理
+          <a href={routePath} target='_black'>
+            {title}
+          </a>
+        ) : (
+          <router-link to={routePath}>{title}</router-link>
+        )}
       </a-menu-item>
     )
   },

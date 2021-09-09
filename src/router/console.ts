@@ -26,10 +26,16 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '绝对路径' },
       },
       {
+        path: 'permission',
+        name: 'Permission',
+        component: () => import('@/views/demo/route/PreRoute.vue'),
+        meta: { title: '权限页', permission: ['account:permission:test'] }, // 权限过滤, 不加载路由
+      },
+      {
         path: 'hidden',
         name: 'Hidden',
         component: () => import('@/views/demo/route/PreRoute.vue'),
-        meta: { title: '隐藏页', hidden: true },
+        meta: { title: '隐藏页', hidden: true }, // 隐藏, 不显示在菜单, 可访问
       },
       {
         path: 'no-meta',
@@ -93,12 +99,17 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/directives',
     component: RouterView,
-    meta: { title: '指令演示' ,icon: 'FireOutlined'},
+    meta: { title: '指令演示', icon: 'FireOutlined' },
     children: [
       {
         path: 'focus',
         component: () => import('@/views/demo/directives/Focus.vue'),
         meta: { title: '聚焦指令' },
+      },
+      {
+        path: 'permission',
+        component: () => import('@/views/demo/directives/Permission.vue'),
+        meta: { title: '权限指令' },
       },
       {
         path: 'contextmenu',
