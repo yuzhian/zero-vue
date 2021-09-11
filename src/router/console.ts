@@ -121,7 +121,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'permission',
         component: () => import('@/views/demo/directives/Permission.vue'),
-        meta: { title: '权限指令' },
+        meta: { title: '权限操作' },
+      },
+      {
+        path: 'support',
+        component: () => import('@/views/demo/directives/Support.vue'),
+        meta: { title: '条件操作' },
       },
     ],
   },
