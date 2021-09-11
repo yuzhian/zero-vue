@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <pre>{{ store.state.account.token }}</pre>
-    <a-button @click="saveToken">创建访问令牌</a-button>
-    <a-button @click="clearToken">清理访问令牌</a-button>
+  <div class="h-screen-sm content-around justify-around">
+    <contrast-pre :left="token" :right="store.state.account.token">
+      <a-button @click="saveToken">创建访问令牌</a-button>
+      <a-button @click="clearToken">清理访问令牌</a-button>
+    </contrast-pre>
 
-    <pre>{{ store.getters['account/userinfo'] }}</pre>
-    <pre>{{ store.state.account.userinfo }}</pre>
-    <a-button @click="saveUserinfo">创建用户信息</a-button>
-    <a-button @click="clearUserinfo">清理用户信息</a-button>
+    <contrast-pre :left="userinfo" :right="store.getters['account/userinfo']">
+      <a-button @click="saveUserinfo">创建用户信息</a-button>
+      <a-button @click="clearUserinfo">清理用户信息</a-button>
+    </contrast-pre>
   </div>
 </template>
 
 <script setup>
 import { useStore } from 'vuex'
+import ContrastPre from '@/components/ContrastPre.vue'
 
 const store = useStore()
 

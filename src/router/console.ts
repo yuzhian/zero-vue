@@ -29,7 +29,7 @@ const routes: RouteRecordRaw[] = [
         path: 'permission',
         name: 'Permission',
         component: () => import('@/views/demo/route/PreRoute.vue'),
-        meta: { title: '权限页', permission: ['account:permission:test'] }, // 权限过滤, 不加载路由
+        meta: { title: '权限页', permission: ['ACCOUNT_PERMISSION_TEST'] }, // 权限过滤, 不加载路由
       },
       {
         path: 'hidden',
