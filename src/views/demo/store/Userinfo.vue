@@ -1,15 +1,13 @@
 <template>
-  <div class="h-screen-sm content-around justify-around">
-    <contrast-pre :left="token" :right="store.state.account.token">
-      <a-button @click="saveToken">创建访问令牌</a-button>
-      <a-button @click="clearToken">清理访问令牌</a-button>
-    </contrast-pre>
+  <contrast-pre :left="token" :right="store.state.account.token">
+    <a-button @click="saveToken">创建访问令牌</a-button>
+    <a-button @click="clearToken">清理访问令牌</a-button>
+  </contrast-pre>
 
-    <contrast-pre :left="userinfo" :right="store.getters['account/userinfo']">
-      <a-button @click="saveUserinfo">创建用户信息</a-button>
-      <a-button @click="clearUserinfo">清理用户信息</a-button>
-    </contrast-pre>
-  </div>
+  <contrast-pre :left="userinfo" :right="store.getters['account/userinfo']">
+    <a-button @click="saveUserinfo">创建用户信息</a-button>
+    <a-button @click="clearUserinfo">清理用户信息</a-button>
+  </contrast-pre>
 </template>
 
 <script setup>

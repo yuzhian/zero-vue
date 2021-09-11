@@ -1,13 +1,11 @@
 import { defineComponent } from 'vue'
 
-const menuClass = 'min-w-32' // class
-
 export const MenuItem = {
   props: ['menu'],
   setup({ menu: { title, onClick, children } }) {
     if (children && children.length) {
       return () => (
-        <a-sub-menu title={title} class={menuClass}>
+        <a-sub-menu title={title} min-w='32'>
           {children.map((menu, index) => (
             <MenuItem key={index} menu={menu} />
           ))}
@@ -16,7 +14,7 @@ export const MenuItem = {
     }
 
     return () => (
-      <a-menu-item title={title} onClick={onClick} class={menuClass}>
+      <a-menu-item title={title} onClick={onClick} min-w='32'>
         {title}
       </a-menu-item>
     )
@@ -32,7 +30,7 @@ export default defineComponent({
         v-slots={{
           ...this.$slots,
           overlay: () => (
-            <a-menu class={menuClass}>
+            <a-menu min-w='32'>
               {this.$props.menus.map((menu, index) => (
                 <MenuItem key={index} menu={menu} />
               ))}

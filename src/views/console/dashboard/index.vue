@@ -1,5 +1,5 @@
 <template>
-  <main class="h-[1000vh]">
+  <main h="1000vh">
     <a-alert type="info" :message="message" :description="description" show-icon closable style="margin-bottom: 0.5rem">
       <template #icon>
         <smile-outlined />

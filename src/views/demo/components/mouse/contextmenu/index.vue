@@ -1,7 +1,7 @@
 <template>
-  <main class="h-full">
+  <main h="full">
     <z-contextmenu :menus="menus">
-      <div class="h-full w-full bg-blue-100"></div>
+      <div h="full" w="full" bg="blue-100"></div>
     </z-contextmenu>
   </main>
 </template>

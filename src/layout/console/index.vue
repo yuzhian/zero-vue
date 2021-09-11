@@ -1,9 +1,18 @@
 <template>
-  <a-layout-header class="fixed w-screen flex justify-between z-999 bg-[#000000cc] backdrop-saturate-[180%] backdrop-blur-xl backdrop-filter select-none">
+  <a-layout-header
+    w="screen"
+    z="999"
+    backdrop="saturate-[180%] blur-xl filter"
+    display="flex"
+    justify="between"
+    position="fixed"
+    bg="[#000000cc]"
+    select="none"
+  >
     <!-- 左侧 -->
     <div>
       <router-link to="/dashboard">
-        <div class="float-left w-120px h-32px mt-16px bg-[#ffffff33] cursor-pointer"></div>
+        <div w="32" h="8" mt="4" float="left" cursor="pointer" bg="[#ffffff33]"></div>
       </router-link>
     </div>
 
@@ -14,7 +23,11 @@
         v-for="({ icon, cls, trigger, handler }, index) in rButtons"
         :key="index"
         :is="icon"
-        class="m-2 text-xl leading-0 text-gray-300 active:rotate-360 transform duration-200"
+        m="2"
+        leading="0"
+        text="xl gray-300"
+        active="rotate-360 transform"
+        duration="160"
         :class="cls"
         @[trigger]="handler"
       />
@@ -30,12 +43,12 @@
   </a-layout-header>
 
   <!-- 侧栏 -->
-  <a-layout-sider class="absolute overflow-x-hidden left-0 bottom-0 h-[calc(100vh-64px)] bg-gray-100">
+  <a-layout-sider position="absolute" overflow="x-hidden" left="0" bottom="0" h="[calc(100vh-64px)]" bg="gray-100">
     <route-menu mode="inline" :routes="menus" />
   </a-layout-sider>
 
   <!-- 主体 -->
-  <a-layout-content class="absolute overflow-auto right-0 bottom-0 h-[calc(100vh-64px)] w-[calc(100vw-200px)] p-4 bg-gray-100">
+  <a-layout-content position="absolute" overflow="auto" right="0" bottom="0" h="[calc(100vh-64px)]" w="[calc(100vw-200px)]" p="4" bg="gray-100">
     <router-view :key="$route.fullPath" v-if="routerAlive" />
   </a-layout-content>
 </template>

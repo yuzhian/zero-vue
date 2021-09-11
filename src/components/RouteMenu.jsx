@@ -79,7 +79,7 @@ export default {
     onBeforeRouteUpdate(to => changeKeysByRoute(to))
 
     return () => (
-      <a-menu openKeys={keys.opened} selectedKeys={keys.selected} attrs={attrs} v-slots={slots} class='select-none border-0'>
+      <a-menu openKeys={keys.opened} selectedKeys={keys.selected} attrs={attrs} v-slots={slots} select='none' border='0'>
         {routes.map(route => (
           <MenuItem route={route} parent-path='/' />
         ))}

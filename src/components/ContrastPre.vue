@@ -1,10 +1,10 @@
 <template>
-  <div class="flex">
-    <pre class="w-1/2">{{ left }}</pre>
-    <pre class="w-1/2">{{ right }}</pre>
+  <div display="flex">
+    <pre w="1/2">{{ left }}</pre>
+    <pre w="1/2">{{ right }}</pre>
   </div>
 
-  <a-space class="flex justify-around">
+  <a-space display="flex" justify="around">
     <a-space>
       <slot name="left"></slot>
     </a-space>
@@ -13,7 +13,7 @@
     </a-space>
   </a-space>
 
-  <a-space class="flex justify-center">
+  <a-space display="flex" justify="around">
     <a-space>
       <slot></slot>
     </a-space>

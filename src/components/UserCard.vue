@@ -1,10 +1,10 @@
 <template>
   <div>
-    <a-card :bordered="false" class="w-300px shadow-xl">
+    <a-card :bordered="false" w="75" shadow="xl">
       <template #cover>
-        <img :src="banner" :width="300" :height="200" />
+        <img :src="banner" alt="banner" :width="300" :height="200" />
       </template>
-      <template class="ant-card-actions" #actions>
+      <template #actions>
         <setting-outlined key="setting" />
         <edit-outlined key="edit" />
         <ellipsis-outlined key="ellipsis" />
