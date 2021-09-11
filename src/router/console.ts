@@ -94,6 +94,18 @@ const routes: RouteRecordRaw[] = [
           },
         ],
       },
+      {
+        path: '/demo/mouse',
+        component: RouterView,
+        meta: { title: '鼠标操作' },
+        children: [
+          {
+            path: 'contextmenu',
+            component: () => import('@/views/demo/components/mouse/contextmenu/index.vue'),
+            meta: { title: '右键菜单' },
+          },
+        ],
+      },
     ],
   },
   {
@@ -110,11 +122,6 @@ const routes: RouteRecordRaw[] = [
         path: 'permission',
         component: () => import('@/views/demo/directives/Permission.vue'),
         meta: { title: '权限指令' },
-      },
-      {
-        path: 'contextmenu',
-        component: () => import('@/views/demo/directives/Contextmenu.vue'),
-        meta: { title: '菜单指令' },
       },
     ],
   },
