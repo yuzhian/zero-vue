@@ -73,8 +73,13 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'pagination',
         component: RouterView,
-        meta: { title: '分页' },
+        meta: { title: '自动分页' },
         children: [
+          {
+            path: 'pagination',
+            component: () => import('@/views/demo/components/pagination/Pagination.vue'),
+            meta: { title: '基础分页' },
+          },
           {
             path: 'table',
             component: RouterView,
@@ -121,12 +126,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'permission',
         component: () => import('@/views/demo/directives/Permission.vue'),
-        meta: { title: '权限操作' },
+        meta: { title: '权限指令' },
       },
       {
         path: 'support',
         component: () => import('@/views/demo/directives/Support.vue'),
-        meta: { title: '条件操作' },
+        meta: { title: '按需显示' },
       },
     ],
   },
