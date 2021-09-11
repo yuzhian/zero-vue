@@ -1,5 +1,5 @@
 <template>
-  <z-table
+  <z-table-pagination
     ref="fullTable"
     :fetch="queryFunc"
     :lazy="true"
@@ -13,10 +13,10 @@
     :locale="{ emptyText: '无数据' }"
     @selection-change="info"
   >
-    <template #action="{record}">
+    <template #action="{ record }">
       <a-button type="link" @click="info(record[rowKey])">编辑</a-button>
     </template>
-  </z-table>
+  </z-table-pagination>
 </template>
 
 <script>

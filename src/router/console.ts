@@ -81,21 +81,9 @@ const routes: RouteRecordRaw[] = [
             meta: { title: '基础分页' },
           },
           {
-            path: 'table',
-            component: RouterView,
-            meta: { title: '表格' },
-            children: [
-              {
-                path: 'simple',
-                component: () => import('@/views/demo/components/pagination/table/Simple.vue'),
-                meta: { title: '简单表格' },
-              },
-              {
-                path: 'full',
-                component: () => import('@/views/demo/components/pagination/table/Full.vue'),
-                meta: { title: '复杂表格' },
-              },
-            ],
+            path: 'table-pagination',
+            component: () => import('@/views/demo/components/pagination/TablePagination.vue'),
+            meta: { title: '表格分页' },
           },
         ],
       },

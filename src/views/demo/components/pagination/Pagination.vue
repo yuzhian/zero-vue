@@ -8,5 +8,5 @@
 </template>
 
 <script setup>
-import { listAndroidArticle } from '@/api/gank.js'
+import { listAndroidArticle } from '@/api/gank'
 </script>

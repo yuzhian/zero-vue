@@ -1,22 +1,23 @@
 import { defineComponent } from 'vue'
+import { Dropdown, Menu, SubMenu, MenuItem } from 'ant-design-vue'
 
-export const MenuItem = {
+export const Items = {
   props: ['menu'],
   setup({ menu: { title, onClick, children } }) {
     if (children && children.length) {
       return () => (
-        <a-sub-menu title={title} min-w='32'>
+        <SubMenu title={title} min-w='32'>
           {children.map((menu, index) => (
-            <MenuItem key={index} menu={menu} />
+            <Items key={index} menu={menu} />
           ))}
-        </a-sub-menu>
+        </SubMenu>
       )
     }
 
     return () => (
-      <a-menu-item title={title} onClick={onClick} min-w='32'>
+      <MenuItem title={title} onClick={onClick} min-w='32'>
         {title}
-      </a-menu-item>
+      </MenuItem>
     )
   },
 }
@@ -25,16 +26,16 @@ export default defineComponent({
   props: ['menus'],
   render() {
     return (
-      <a-dropdown
+      <Dropdown
         trigger={['contextmenu']}
         v-slots={{
           ...this.$slots,
           overlay: () => (
-            <a-menu min-w='32'>
+            <Menu min-w='32'>
               {this.$props.menus.map((menu, index) => (
-                <MenuItem key={index} menu={menu} />
+                <Items key={index} menu={menu} />
               ))}
-            </a-menu>
+            </Menu>
           ),
         }}
       />
