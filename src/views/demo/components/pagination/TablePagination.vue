@@ -1,18 +1,5 @@
 <template>
-  <z-table-pagination
-    ref="fullTable"
-    :fetch="queryFunc"
-    :lazy="true"
-    :params="params"
-    show-no="编号"
-    row-selection
-    :columns="columns"
-    :row-key="rowKey"
-    bordered
-    :pagination="{ pageSize: 30 }"
-    :locale="{ emptyText: '无数据' }"
-    @selection-change="info"
-  >
+  <z-table-pagination :fetch="queryFunc" :params="params" :columns="columns" :pagination="{ pageSize: 30 }">
     <template #action="{ record }">
       <a-button type="link" @click="info(record[rowKey])">编辑</a-button>
     </template>
@@ -46,7 +33,6 @@ export default {
         slots: { customRender: 'action' },
       },
     ],
-    rowKey: '_id',
   }),
   methods: {
     info(...items) {

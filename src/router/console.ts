@@ -71,6 +71,18 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '组件演示', icon: 'InboxOutlined' },
     children: [
       {
+        path: 'table',
+        component: RouterView,
+        meta: { title: '表格扩展' },
+        children: [
+          {
+            path: 'table',
+            component: () => import('@/views/demo/components/table/Table.vue'),
+            meta: { title: '基础表格' },
+          },
+        ],
+      },
+      {
         path: 'pagination',
         component: RouterView,
         meta: { title: '自动分页' },

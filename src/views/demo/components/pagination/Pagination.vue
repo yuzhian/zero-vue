@@ -1,5 +1,5 @@
 <template>
-  <z-pagination :fetch="listAndroidArticle">
+  <z-pagination :fetch="listAndroidArticle" :pageSize="50">
     <template v-slot="{ title }">
       <p>{{ title }}</p>
     </template>
