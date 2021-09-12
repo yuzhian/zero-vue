@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       records: [], // 结果集
+      loading: false, // 加载状态
       page: {}, // 分页参数
       filters: [], // 过滤参数
       sorter: {}, // 排序参数
@@ -19,11 +20,16 @@ export default {
   methods: {
     // 查询
     handleFetch() {
-      this.fetch({ ...this.page, ...this.filters, ...this.sorter, ...this.params }).then((resp: any) => {
-        this.records = resp[import.meta.env.VITE_PAGINATION_RESULTS as string]
-        this.page.current = resp[import.meta.env.VITE_PAGINATION_CURRENT as string]
-        this.page.total = resp[import.meta.env.VITE_PAGINATION_TOTAL as string]
-      })
+      this.loading = true
+      this.fetch({ ...this.page, ...this.filters, ...this.sorter, ...this.params })
+        .then((resp: any) => {
+          this.records = resp[import.meta.env.VITE_PAGINATION_RESULTS as string]
+          this.page.current = resp[import.meta.env.VITE_PAGINATION_CURRENT as string]
+          this.page.total = resp[import.meta.env.VITE_PAGINATION_TOTAL as string]
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
     // 初始化
     init(pagination: Object) {

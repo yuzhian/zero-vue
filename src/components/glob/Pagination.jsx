@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { Pagination } from 'ant-design-vue'
+import { Pagination, Skeleton } from 'ant-design-vue'
 import paginationMixin from '@/plugins/mixins/pagination.ts'
 
 export default defineComponent({
@@ -7,7 +7,9 @@ export default defineComponent({
   render() {
     return (
       <div>
-        {this.records.map(record => this.$slots.default(record))}
+        <Skeleton loading={this.loading} active title={false} paragraph={{ rows: this.page.pageSize }}>
+          {this.records.map(record => this.$slots.default(record))}
+        </Skeleton>
         <Pagination attrs={this.$attrs} v-slots={this.$slots} {...this.page} onChange={this.handlePaginationChange} />
       </div>
     )

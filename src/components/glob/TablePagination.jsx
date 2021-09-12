@@ -8,7 +8,9 @@ export default defineComponent({
     pagination: { type: Object, default: () => ({}) }, // 分页参数
   },
   render() {
-    return <Table dataSource={this.records} pagination={this.page} attrs={this.$attrs} v-slots={this.$slots} onChange={this.handleChange} />
+    return (
+      <Table dataSource={this.records} pagination={this.page} attrs={this.$attrs} v-slots={this.$slots} loading={this.loading} onChange={this.handleChange} />
+    )
   },
   created() {
     this.init(this.pagination)
