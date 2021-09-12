@@ -1,4 +1,4 @@
-import { RouteRecordRaw, createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
+import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
 import store from '../store'
 
 import displayRoutes from './display'
@@ -43,9 +43,9 @@ const router = createRouter({
   routes: filterRouteTree(routes),
 })
 
-router.beforeEach((to: RouteLocationNormalized, from) => {
+router.beforeEach((to, from, next) => {
   document.title = (to.meta.title as string) || (to.name as string) || to.path
-  return true
+  next()
 })
 
 export default router

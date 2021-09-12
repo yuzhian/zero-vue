@@ -1,9 +1,10 @@
 <template>
   <a-space>
-    <code id="code" bg="yellow-200">{{ code }}</code>
+    <a-tooltip :visible="tooltip.visible" :title="tooltip.message" :color="tooltip.color">
+      <code id="code" bg="yellow-200">{{ code }}</code>
+    </a-tooltip>
     <a-button v-clipboard:#code>复制</a-button>
-    <a-button v-clipboard:#code @click="handleClick">复制</a-button>
-    <a-button v-clipboard:#code="{ success: handleSuccess, error: handleError }" @click="handleClick">复制, 自定义处理</a-button>
+    <a-button v-clipboard:#code="{ success: handleSuccess, error: handleError }">复制, 自定义处理</a-button>
   </a-space>
 </template>
 
@@ -13,19 +14,21 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   data: () => ({
+    tooltip: { visible: false, message: '', color: '' },
     code: ['ACCOUNT_INFO_GET', 'ACCOUNT_PERMISSION_TEST'],
   }),
   methods: {
     handleSuccess(e: ClipboardJS.Event) {
-      console.log('success', e)
-      alert('已复制到剪切板')
+      this.handleOpenTooltip('已复制到剪切板', 'green')
     },
     handleError(e: ClipboardJS.Event) {
-      console.log('error', e)
-      alert('复制失败')
+      this.handleOpenTooltip('复制失败', 'red')
     },
-    handleClick(e: Event) {
-      console.log('click', e)
+    handleOpenTooltip(message: string, color: string) {
+      this.tooltip = { visible: true, message, color }
+      setTimeout(() => {
+        this.tooltip.visible = false
+      }, 2000)
     },
   },
 })
