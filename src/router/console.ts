@@ -133,6 +133,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/demo/directives/Support.vue'),
         meta: { title: '按需显示' },
       },
+      {
+        path: 'clipboard',
+        component: () => import('@/views/demo/directives/Clipboard.vue'),
+        meta: { title: '剪贴板' },
+      },
     ],
   },
   // 演示功能 end
