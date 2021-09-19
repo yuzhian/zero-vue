@@ -141,6 +141,27 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   // 演示功能 end
+
+  // 个人练习页面备份
+  {
+    path: '/collection',
+    component: RouterView,
+    meta: { title: '页面备份', icon: 'ShoppingOutlined' },
+    children: [
+      {
+        path: 'css',
+        component: RouterView,
+        meta: { title: 'CSS' },
+        children: [
+          {
+            path: 'keyboard',
+            component: () => import('@/views/collection/css/Keyboard.vue'),
+            meta: { title: 'grid 键盘布局' },
+          },
+        ],
+      },
+    ],
+  },
 ]
 
 export default routes
