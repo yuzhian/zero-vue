@@ -138,6 +138,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/demo/directives/Clipboard.vue'),
         meta: { title: '剪贴板' },
       },
+      {
+        path: 'resize',
+        component: () => import('@/views/demo/directives/Resize.vue'),
+        meta: { title: '尺寸变化' },
+      },
     ],
   },
   // 演示功能 end
@@ -148,6 +153,18 @@ const routes: RouteRecordRaw[] = [
     component: RouterView,
     meta: { title: '页面备份', icon: 'ShoppingOutlined' },
     children: [
+      {
+        path: 'js',
+        component: RouterView,
+        meta: { title: 'JavaScript' },
+        children: [
+          {
+            path: 'matrix',
+            component: () => import('@/views/collection/js/Matrix.vue'),
+            meta: { title: '字符雨' },
+          },
+        ],
+      },
       {
         path: 'css',
         component: RouterView,

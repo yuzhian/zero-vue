@@ -1,4 +1,4 @@
-import { BindingMetadata } from '@vue/compiler-sfc'
+import { DirectiveBinding } from 'vue'
 import { message } from 'ant-design-vue'
 
 import Clipboard from 'clipboard'
@@ -9,7 +9,7 @@ interface ClipboardHandlers {
 }
 
 export default {
-  mounted(el: HTMLElement, binding: BindingMetadata) {
+  mounted(el: HTMLElement, binding: DirectiveBinding) {
     const targetElement = document.querySelector(binding.arg as string)
     if (!targetElement) return
 
