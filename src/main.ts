@@ -11,6 +11,8 @@ import 'ant-design-vue/dist/antd.css'
 
 import 'virtual:windi.css'
 
+import './assets/glob/index.scss'
+
 const app = createApp(App).use(router).use(store).use(antdv)
 
 registerComponents(app)
