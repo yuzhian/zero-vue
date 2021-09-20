@@ -1,14 +1,5 @@
 <template>
-  <a-layout-header
-    w="screen"
-    z="999"
-    backdrop="saturate-[180%] blur-xl filter"
-    display="flex"
-    justify="between"
-    position="fixed"
-    bg="[#000000cc]"
-    select="none"
-  >
+  <a-layout-header w="screen" z="999" backdrop="saturate-[180%] blur-xl filter" display="flex" justify="between" position="fixed" select="none">
     <!-- 左侧 -->
     <div>
       <router-link to="/dashboard">
