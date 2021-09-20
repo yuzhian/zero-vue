@@ -126,6 +126,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/demo/directives/Clipboard.vue'),
         meta: { title: '剪贴板' },
       },
+      {
+        path: 'debounce',
+        component: () => import('@/views/demo/directives/Debounce.vue'),
+        meta: { title: '输入框防抖' },
+      },
+      {
+        path: 'throttle',
+        component: () => import('@/views/demo/directives/Throttle.vue'),
+        meta: { title: '输入框节流' },
+      },
     ],
   },
   {
