@@ -17,15 +17,14 @@
         m="2"
         leading="0"
         text="xl gray-300"
-        active="rotate-360 transform"
-        duration="160"
+        class="animated active:animate-tada"
         :class="cls"
         @[trigger]="handler"
       />
 
       <!-- 头像框 -->
       <a-dropdown :trigger="['hover']" :overlayStyle="{ position: 'absolute' }">
-        <a-avatar :src="userinfo.avatar" :style="{ cursor: 'pointer' }" />
+        <a-avatar :src="userinfo.avatar" cursor="pointer" class="animated hover:animate-rotateIn" />
         <template #overlay>
           <user-card :banner="userinfo.banner" :avatar="userinfo.avatar" :nickname="userinfo.nickname" :bio="userinfo.bio" />
         </template>
@@ -55,7 +54,7 @@
 <script setup>
 import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { SettingOutlined, HeatMapOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
+import { SettingOutlined, RadarChartOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
 
 import RouteMenu from '@/components/RouteMenu.jsx'
 import UserCard from '@/components/UserCard.vue'
@@ -84,7 +83,7 @@ const refreshComponent = () => {
 
 // 顶栏右侧按钮
 const rButtons = [
-  { text: '首页', icon: HeatMapOutlined, handler: () => router.push('/'), trigger: 'click', cls: '' },
+  { text: '首页', icon: RadarChartOutlined, handler: () => router.push('/'), trigger: 'click', cls: '' },
   { text: '刷新', icon: SyncOutlined, handler: () => refreshComponent(), trigger: 'click', cls: '' },
   { text: '设置', icon: SettingOutlined, handler: '', trigger: '', cls: '' },
   { text: '消息', icon: MessageOutlined, handler: '', trigger: '', cls: '' },
