@@ -34,7 +34,15 @@
   </a-layout-header>
 
   <!-- 侧栏 -->
-  <a-layout-sider position="absolute" overflow="x-hidden" left="0" bottom="0" h="[calc(100vh-64px)]" bg="gray-100">
+  <a-layout-sider
+    position="absolute"
+    overflow="x-hidden"
+    left="0"
+    bottom="0"
+    h="[calc(100vh-64px)]"
+    bg="gray-100"
+    scrollbar="thin hover:thumb-gray-300 track-gray-100"
+  >
     <route-menu mode="inline" :routes="menus" />
   </a-layout-sider>
 
