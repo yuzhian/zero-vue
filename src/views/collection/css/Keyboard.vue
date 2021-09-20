@@ -1,18 +1,10 @@
 <template>
-  <input ref="input" type="text" w="full" m="b-2" />
+  <a-input ref="input" type="text" w="full" m="b-2" />
 
   <div grid="~ rows-1 cols-30 gap-1" select="none">
-    <button
-      v-for="{ code, text, span } in keys"
-      :key="code"
-      :ref="code"
-      bg="white"
-      leading="16"
-      rounded="default"
-      text="center"
-      cursor="pointer"
-      :class="span"
-    >{{ text }}</button>
+    <button v-for="{ code, text, span } in keys" :key="code" :ref="code" bg="white" leading="16" rounded="default" text="center" cursor="pointer" :class="span">
+      {{ text }}
+    </button>
   </div>
 </template>
 
@@ -21,14 +13,12 @@ import { getCurrentInstance, onMounted } from 'vue'
 
 const { proxy } = getCurrentInstance()
 
-const defaultColor = 'white'
-
 // 键盘点击修改按键颜色
-function changeKeyColor(code, color = defaultColor) {
+function changeKeyColor(code, color = 'white') {
   proxy.$refs[code] && (proxy.$refs[code].style.backgroundColor = color)
 }
-document.onkeydown = (e) => changeKeyColor(e.code, '#ccc')
-document.onkeyup = (e) => changeKeyColor(e.code)
+document.onkeydown = e => changeKeyColor(e.code, '#ccc')
+document.onkeyup = e => changeKeyColor(e.code)
 
 // 聚焦输入框
 onMounted(() => {
