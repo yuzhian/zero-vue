@@ -129,14 +129,19 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/demo/store',
+    path: '/demo/system',
     component: RouterView,
-    meta: { title: '全局状态', icon: 'HeartOutlined' },
+    meta: { title: '系统配置', icon: 'HeartOutlined' },
     children: [
       {
-        path: 'userinfo',
-        meta: { title: '用户信息' },
-        component: () => import('@/views/demo/store/Userinfo.vue'),
+        path: 'store',
+        meta: { title: '全局状态' },
+        component: () => import('@/views/demo/system/Store.vue'),
+      },
+      {
+        path: 'refresh_token',
+        meta: { title: '令牌无感刷新' },
+        component: () => import('@/views/demo/system/RefreshToken.vue'),
       },
     ],
   },

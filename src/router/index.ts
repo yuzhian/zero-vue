@@ -44,7 +44,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = (to.meta.title as string) || (to.name as string) || to.path
+  document.title = `${(to.meta.title as string) || (to.name as string) || to.path} | ${import.meta.env.VITE_APP_TITLE}`
   next()
 })
 

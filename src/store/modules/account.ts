@@ -3,12 +3,18 @@ const TOKEN_KEY: string = 'token'
 
 const state = {
   userinfo: JSON.parse(localStorage.getItem(USERINFO_KEY) || '{}'),
-  token: localStorage.getItem(TOKEN_KEY),
+  token: JSON.parse(localStorage.getItem(TOKEN_KEY) || '{}'),
 }
 
 const getters = {
   userinfo: (state: any) => {
     return state.userinfo
+  },
+  accessToken(state: any) {
+    return state.token.access_token
+  },
+  refreshToken(state: any) {
+    return state.token.refresh_token
   },
 }
 
@@ -22,12 +28,12 @@ const mutations = {
     localStorage.removeItem(USERINFO_KEY)
   },
 
-  token(state: any, token: string) {
-    state.token = token
-    localStorage.setItem(TOKEN_KEY, token)
+  token(state: any, data: any) {
+    state.token = data
+    localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
   },
   clearToken(state: any) {
-    state.token = ''
+    state.token = {}
     localStorage.removeItem(TOKEN_KEY)
   },
 }
