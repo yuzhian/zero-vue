@@ -54,18 +54,6 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/demo/store',
-    component: RouterView,
-    meta: { title: '状态管理', icon: 'HeartOutlined' },
-    children: [
-      {
-        path: 'userinfo',
-        meta: { title: '用户信息' },
-        component: () => import('@/views/demo/store/Userinfo.vue'),
-      },
-    ],
-  },
-  {
     path: '/demo/components',
     component: RouterView,
     meta: { title: '组件演示', icon: 'InboxOutlined' },
@@ -119,11 +107,6 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '指令演示', icon: 'FireOutlined' },
     children: [
       {
-        path: 'focus',
-        component: () => import('@/views/demo/directives/Focus.vue'),
-        meta: { title: '聚焦指令' },
-      },
-      {
         path: 'permission',
         component: () => import('@/views/demo/directives/Permission.vue'),
         meta: { title: '权限指令' },
@@ -131,27 +114,38 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'support',
         component: () => import('@/views/demo/directives/Support.vue'),
-        meta: { title: '按需显示' },
-      },
-      {
-        path: 'clipboard',
-        component: () => import('@/views/demo/directives/Clipboard.vue'),
-        meta: { title: '剪贴板' },
+        meta: { title: '状态支持' },
       },
       {
         path: 'resize',
         component: () => import('@/views/demo/directives/Resize.vue'),
         meta: { title: '尺寸变化' },
       },
+      {
+        path: 'clipboard',
+        component: () => import('@/views/demo/directives/Clipboard.vue'),
+        meta: { title: '剪贴板' },
+      },
+    ],
+  },
+  {
+    path: '/demo/store',
+    component: RouterView,
+    meta: { title: '全局状态', icon: 'HeartOutlined' },
+    children: [
+      {
+        path: 'userinfo',
+        meta: { title: '用户信息' },
+        component: () => import('@/views/demo/store/Userinfo.vue'),
+      },
     ],
   },
   // 演示功能 end
 
-  // 个人练习页面备份
   {
     path: '/collection',
     component: RouterView,
-    meta: { title: '页面备份', icon: 'ShoppingOutlined' },
+    meta: { title: '页面收集', icon: 'StarOutlined' },
     children: [
       {
         path: 'js',
