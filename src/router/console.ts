@@ -4,10 +4,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import('@/views/console/dashboard/index.vue'),
-    meta: { title: '控制台', icon: 'SafetyCertificateOutlined' },
+    component: () => import('/src/views/console/dashboard/index.vue'),
+    meta: { title: '控制台', icon: 'ShopOutlined' },
   },
-  // 演示功能 start
+
   {
     path: '/demo/route',
     component: RouterView,
@@ -16,35 +16,35 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'relative-path',
         name: 'RelativePath',
-        component: () => import('@/views/demo/route/PreRoute.vue'),
+        component: () => import('/src/views/demo/route/PreRoute.vue'),
         meta: { title: '相对路径' },
       },
       {
         path: '/absolute-path',
         name: 'AbsolutePath',
-        component: () => import('@/views/demo/route/PreRoute.vue'),
+        component: () => import('/src/views/demo/route/PreRoute.vue'),
         meta: { title: '绝对路径' },
       },
       {
         path: 'permission',
         name: 'Permission',
-        component: () => import('@/views/demo/route/PreRoute.vue'),
+        component: () => import('/src/views/demo/route/PreRoute.vue'),
         meta: { title: '权限页', permission: ['ACCOUNT_PERMISSION_TEST'] }, // 权限过滤, 不加载路由
       },
       {
         path: 'hidden',
         name: 'Hidden',
-        component: () => import('@/views/demo/route/PreRoute.vue'),
+        component: () => import('/src/views/demo/route/PreRoute.vue'),
         meta: { title: '隐藏页', hidden: true }, // 隐藏, 不显示在菜单, 可访问
       },
       {
         path: 'no-meta',
         name: 'NoMeta',
-        component: () => import('@/views/demo/route/PreRoute.vue'),
+        component: () => import('/src/views/demo/route/PreRoute.vue'),
       },
       {
         path: 'no-name-and-meta',
-        component: () => import('@/views/demo/route/PreRoute.vue'),
+        component: () => import('/src/views/demo/route/PreRoute.vue'),
       },
       {
         path: 'https://github.com/yuzhian/zero-vue',
@@ -53,10 +53,11 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
+
   {
     path: '/demo/components',
     component: RouterView,
-    meta: { title: '组件演示', icon: 'InboxOutlined' },
+    meta: { title: '组件演示', icon: 'UsbOutlined' },
     children: [
       {
         path: 'table',
@@ -65,7 +66,7 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: 'table',
-            component: () => import('@/views/demo/components/table/Table.vue'),
+            component: () => import('/src/views/demo/components/table/Table.vue'),
             meta: { title: '基础表格' },
           },
         ],
@@ -77,12 +78,12 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: 'pagination',
-            component: () => import('@/views/demo/components/pagination/Pagination.vue'),
+            component: () => import('/src/views/demo/components/pagination/Pagination.vue'),
             meta: { title: '基础分页' },
           },
           {
             path: 'table-pagination',
-            component: () => import('@/views/demo/components/pagination/TablePagination.vue'),
+            component: () => import('/src/views/demo/components/pagination/TablePagination.vue'),
             meta: { title: '表格分页' },
           },
         ],
@@ -94,13 +95,14 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: 'contextmenu',
-            component: () => import('@/views/demo/components/mouse/contextmenu/index.vue'),
+            component: () => import('/src/views/demo/components/mouse/contextmenu/index.vue'),
             meta: { title: '右键菜单' },
           },
         ],
       },
     ],
   },
+
   {
     path: '/demo/directives',
     component: RouterView,
@@ -108,83 +110,69 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: 'permission',
-        component: () => import('@/views/demo/directives/Permission.vue'),
+        component: () => import('/src/views/demo/directives/Permission.vue'),
         meta: { title: '权限指令' },
       },
       {
         path: 'support',
-        component: () => import('@/views/demo/directives/Support.vue'),
+        component: () => import('/src/views/demo/directives/Support.vue'),
         meta: { title: '状态支持' },
       },
       {
         path: 'resize',
-        component: () => import('@/views/demo/directives/Resize.vue'),
+        component: () => import('/src/views/demo/directives/Resize.vue'),
         meta: { title: '尺寸变化' },
       },
       {
         path: 'clipboard',
-        component: () => import('@/views/demo/directives/Clipboard.vue'),
+        component: () => import('/src/views/demo/directives/Clipboard.vue'),
         meta: { title: '剪贴板' },
       },
       {
         path: 'debounce',
-        component: () => import('@/views/demo/directives/Debounce.vue'),
+        component: () => import('/src/views/demo/directives/Debounce.vue'),
         meta: { title: '输入框防抖' },
       },
       {
         path: 'throttle',
-        component: () => import('@/views/demo/directives/Throttle.vue'),
+        component: () => import('/src/views/demo/directives/Throttle.vue'),
         meta: { title: '输入框节流' },
       },
     ],
   },
+
   {
     path: '/demo/system',
     component: RouterView,
-    meta: { title: '系统配置', icon: 'HeartOutlined' },
+    meta: { title: '全局工具', icon: 'RobotOutlined' },
     children: [
       {
         path: 'store',
         meta: { title: '全局状态' },
-        component: () => import('@/views/demo/system/Store.vue'),
+        component: () => import('/src/views/demo/system/Store.vue'),
       },
       {
         path: 'refresh_token',
         meta: { title: '令牌无感刷新' },
-        component: () => import('@/views/demo/system/RefreshToken.vue'),
+        component: () => import('/src/views/demo/system/RefreshToken.vue'),
       },
     ],
   },
-  // 演示功能 end
 
   {
     path: '/collection',
     component: RouterView,
-    meta: { title: '页面收集', icon: 'StarOutlined' },
+    meta: { title: '页面收集', icon: 'HeartOutlined' },
     children: [
       {
-        path: 'js',
-        component: RouterView,
-        meta: { title: 'JavaScript' },
-        children: [
-          {
-            path: 'matrix',
-            component: () => import('@/views/collection/js/Matrix.vue'),
-            meta: { title: '字符雨' },
-          },
-        ],
+        path: 'matrix',
+        component: () => import('/src/views/collection/Matrix.vue'),
+        meta: { title: '字符雨' },
       },
       {
-        path: 'css',
-        component: RouterView,
-        meta: { title: 'CSS' },
-        children: [
-          {
-            path: 'keyboard',
-            component: () => import('@/views/collection/css/Keyboard.vue'),
-            meta: { title: 'grid 键盘布局' },
-          },
-        ],
+        path: 'keyboard',
+        component: () => import('/src/views/collection/Keyboard.vue'),
+        meta: { title: 'grid 键盘布局' },
       },
     ],
   },

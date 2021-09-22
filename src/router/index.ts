@@ -9,13 +9,13 @@ const routes: RouteRecordRaw[] = [
   // 公开页面, 首页/新闻/产品/支持等, 上中下布局
   {
     path: '/',
-    component: () => import('@/layout/display/index.vue'),
+    component: () => import('/src/layout/display/index.vue'),
     children: displayRoutes,
   },
   // 控制台, 用户服务等, 顶部-侧边布局
   {
     path: '/',
-    component: () => import('@/layout/console/index.vue'),
+    component: () => import('/src/layout/console/index.vue'),
     children: consoleRoutes,
   },
   // 公共页面,

@@ -14,10 +14,10 @@
   </contrast-pre>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import ContrastPre from '@/components/ContrastPre.vue'
+import ContrastPre from '/src/components/ContrastPre.vue'
 
 const router = useRouter()
 const store = useStore()

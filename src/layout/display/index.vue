@@ -16,6 +16,6 @@
   <a-layout-footer text="center">Ant Design ©2018 Created by Ant UED</a-layout-footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { DashboardOutlined } from '@ant-design/icons-vue'
 </script>

@@ -13,12 +13,12 @@
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SmileOutlined } from '@ant-design/icons-vue'
 
 import Dependencies from './Dependencies.vue'
 
-import { dependencies, devDependencies } from '@/../package.json'
+import { dependencies, devDependencies } from '../../../../package.json'
 
 const message = '“我真傻，真的，”祥林嫂抬起她没有神采的眼睛来，接着说。'
 const description =

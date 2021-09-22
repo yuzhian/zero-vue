@@ -33,15 +33,7 @@
   </a-layout-header>
 
   <!-- 侧栏 -->
-  <a-layout-sider
-    position="absolute"
-    overflow="x-hidden"
-    left="0"
-    bottom="0"
-    h="[calc(100vh-64px)]"
-    bg="gray-100"
-    scrollbar="thin hover:thumb-gray-300 track-gray-100"
-  >
+  <a-layout-sider position="absolute" overflow="x-hidden" left="0" bottom="0" h="[calc(100vh-64px)]" bg="gray-100" scrollbar="thin hover:thumb-gray-300">
     <route-menu mode="inline" :routes="menus" />
   </a-layout-sider>
 
@@ -51,20 +43,20 @@
   </a-layout-content>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { nextTick, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { SettingOutlined, RadarChartOutlined, MessageOutlined, SyncOutlined } from '@ant-design/icons-vue'
+import { RouteRecordRaw, useRouter } from 'vue-router'
+import { SettingOutlined, ClearOutlined, MessageOutlined, HomeOutlined } from '@ant-design/icons-vue'
 
-import RouteMenu from '@/components/RouteMenu.jsx'
-import UserCard from '@/components/UserCard.vue'
+import RouteMenu from '/src/components/RouteMenu.jsx'
+import UserCard from '/src/components/UserCard.vue'
 
-import routes from '/src/router/console'
+import routes from '/src/router/console.ts'
 
 const router = useRouter()
 
 // 菜单项
-const menus = routes.filter(({ path, meta }) => path !== '/dashboard' && (!meta || !meta.hidden))
+const menus = routes.filter(({ path, meta }: RouteRecordRaw) => path !== '/dashboard' && (!meta || !meta.hidden))
 
 // 用户信息
 const userinfo = {
@@ -83,8 +75,8 @@ const refreshComponent = () => {
 
 // 顶栏右侧按钮
 const rButtons = [
-  { text: '首页', icon: RadarChartOutlined, handler: () => router.push('/'), trigger: 'click', cls: '' },
-  { text: '刷新', icon: SyncOutlined, handler: () => refreshComponent(), trigger: 'click', cls: '' },
+  { text: '首页', icon: HomeOutlined, handler: () => router.push('/'), trigger: 'click', cls: '' },
+  { text: '刷新', icon: ClearOutlined, handler: () => refreshComponent(), trigger: 'click', cls: '' },
   { text: '设置', icon: SettingOutlined, handler: '', trigger: '', cls: '' },
   { text: '消息', icon: MessageOutlined, handler: '', trigger: '', cls: '' },
 ]

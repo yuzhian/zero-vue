@@ -2,12 +2,12 @@
   <pre h="full" w="full" bg="blue-100" v-resize="handleResize">{{ contentRect }}</pre>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-const contentRect = ref({ a: 1 })
+const contentRect = ref<DOMRectReadOnly>()
 
-function handleResize(entries) {
+function handleResize(entries: ResizeObserverEntry[]) {
   contentRect.value = entries[0].contentRect
 }
 </script>

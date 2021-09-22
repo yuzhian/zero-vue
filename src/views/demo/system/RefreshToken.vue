@@ -31,22 +31,22 @@
   </ContrastPre>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
 import request from '/src/plugins/request.ts'
 import store from '/src/store/index.ts'
 
-import ContrastPre from '@/components/ContrastPre.vue'
+import ContrastPre from '/src/components/ContrastPre.vue'
 
-const state = reactive({ token: { ...store.state.account.token }, responses: [] })
+const state = reactive({ token: { ...store.state.account.token }, responses: [] } as any)
 watchEffect(() => (state.token = { ...store.state.account.token }))
 
 const handleUpdateToken = () => {
   store.commit('account/token', { ...state.token })
 }
 
-const handleRequest = (...params) => {
-  Promise.all(params.map(param => request.get(`/test/${param}`))).then(responses => {
+const handleRequest = (...params: string[]) => {
+  Promise.all(params.map(param => request.get(`/test/${param}`))).then((responses: any[]) => {
     state.responses = responses
   })
 }

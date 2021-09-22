@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import paginationMixin from '@/plugins/mixins/pagination.ts'
+import paginationMixin from '/src/plugins/mixins/pagination.ts'
 import Table from './Table'
 
 export default defineComponent({

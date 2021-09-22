@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { SettingOutlined, EditOutlined, EllipsisOutlined } from '@ant-design/icons-vue'
 
 const props = defineProps({

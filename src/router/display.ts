@@ -4,19 +4,19 @@ const router: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/display/home/index.vue'),
+    component: () => import('/src/views/display/home/index.vue'),
     meta: { title: '首页' },
   },
   {
     path: '/display/full',
     name: 'DisplayFull',
-    component: () => import('@/views/demo/route/PreRoute.vue'),
+    component: () => import('/src/views/demo/route/PreRoute.vue'),
     meta: { title: 'DisplayFull Page', icon: 'TrophyOutlined' },
   },
   {
     path: '/display/hidden',
     name: 'DisplayHidden',
-    component: () => import('@/views/demo/route/PreRoute.vue'),
+    component: () => import('/src/views/demo/route/PreRoute.vue'),
     meta: {
       title: 'DisplayHidden Page',
       hidden: true,
@@ -24,7 +24,7 @@ const router: RouteRecordRaw[] = [
   },
   {
     path: '/display/no-name-and-meta',
-    component: () => import('@/views/demo/route/PreRoute.vue'),
+    component: () => import('/src/views/demo/route/PreRoute.vue'),
   },
 ]
 

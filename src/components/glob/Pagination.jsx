@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { Pagination, Skeleton } from 'ant-design-vue'
-import paginationMixin from '@/plugins/mixins/pagination.ts'
+import paginationMixin from '/src/plugins/mixins/pagination.ts'
 
 export default defineComponent({
   mixins: [paginationMixin],

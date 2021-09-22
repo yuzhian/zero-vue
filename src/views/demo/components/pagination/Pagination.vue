@@ -7,6 +7,6 @@
   </z-pagination>
 </template>
 
-<script setup>
-import { listAndroidArticle } from '@/api/gank'
+<script setup lang="ts">
+import { listAndroidArticle } from '/src/api/gank'
 </script>

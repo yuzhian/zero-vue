@@ -5,9 +5,9 @@
   </contrast-pre>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useStore } from 'vuex'
-import ContrastPre from '@/components/ContrastPre.vue'
+import ContrastPre from '/src/components/ContrastPre.vue'
 
 const store = useStore()
 

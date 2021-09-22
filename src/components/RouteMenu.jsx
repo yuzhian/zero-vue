@@ -2,9 +2,9 @@ import { h, reactive } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import * as antIcons from '@ant-design/icons-vue'
 
-import routes from '@/router/console.ts'
+import routes from '/src/router/console.ts'
 
-import '@/assets/antMenu.css'
+import '/src/assets/antMenu.css'
 
 /**
  * 当前路由菜单对应的完整路由地址

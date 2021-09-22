@@ -6,8 +6,8 @@
   </main>
 </template>
 
-<script setup>
-function log(message) {
+<script setup lang="ts">
+function log(message: any) {
   console.log(message)
 }
 
@@ -16,10 +16,7 @@ const menus = [
     title: '第一项(目录)',
     onClick: () => log('第一项'),
     children: [
-      {
-        title: '长字符串长字符串长字符串长字符串长字符串长字符串长字符串长字符串',
-        onClick: () => log('长字符串'),
-      },
+      { title: '长字符串长字符串长字符串长字符串长字符串长字符串长字符串长字符串', onClick: () => log('长字符串') },
       {
         title: '嵌套目录',
         children: [

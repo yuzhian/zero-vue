@@ -8,13 +8,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { getCurrentInstance, onMounted } from 'vue'
 
-const { proxy } = getCurrentInstance()
+const { proxy }: any = getCurrentInstance()
 
 // 键盘点击修改按键颜色
-function changeKeyColor(code, color = 'white') {
+function changeKeyColor(code: string, color = 'white') {
   proxy.$refs[code] && (proxy.$refs[code].style.backgroundColor = color)
 }
 document.onkeydown = e => changeKeyColor(e.code, '#ccc')

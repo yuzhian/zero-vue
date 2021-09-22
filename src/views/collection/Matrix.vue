@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 
 const chars = 'abcdefghijklmnopqrstuvwxyz0123456789' // 字符串
@@ -15,20 +15,21 @@ const color = '#333333' // 文字颜色
 let width = 0 // 外层容器宽
 let height = 0 // 高
 
-let canvas = null // canvas 元素
-let ctx = null // canvas.getContext('2d')
-let timer = null // 定时器
+let canvas: HTMLCanvasElement // canvas 元素
+let ctx: CanvasRenderingContext2D | null // canvas 元素 2D 渲染上下文
+let timer: number // 定时器
 
-let columns = [] // 每列位置
+let columns: number[] = [] // 每列位置
 let colunm = 0 // 列数
 
 onMounted(() => {
-  canvas = document.getElementById('canvas')
+  canvas = document.getElementById('canvas') as HTMLCanvasElement
   ctx = canvas.getContext('2d')
   timer = setInterval(() => execute(), 30)
 })
 
-function execute() {
+const execute = () => {
+  if (!ctx) return
   ctx.font = `${fontSize}px`
   ctx.fillStyle = mask
   ctx.fillRect(0, 0, width, height)
@@ -44,7 +45,7 @@ function execute() {
 /**
  * 尺寸变化, 重设宽高和列
  */
-function handleResize(entities) {
+const handleResize = (entities: ResizeObserverEntry[]) => {
   canvas.height = height = entities[0].contentRect.height
   canvas.width = width = entities[0].contentRect.width
   colunm = Math.ceil(width / fontSize)
@@ -54,7 +55,5 @@ function handleResize(entities) {
 }
 
 // 随机字符
-function char() {
-  return chars[Math.floor(Math.random() * chars.length)]
-}
+const char = () => chars[Math.floor(Math.random() * chars.length)]
 </script>
