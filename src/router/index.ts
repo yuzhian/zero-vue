@@ -1,4 +1,4 @@
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
+import { RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
 import store from '../store'
 
 import displayRoutes from './display'
@@ -39,7 +39,7 @@ function filterRouteTree(routes: RouteRecordRaw[]): RouteRecordRaw[] {
 }
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: filterRouteTree(routes),
 })
 

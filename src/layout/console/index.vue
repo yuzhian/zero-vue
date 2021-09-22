@@ -51,7 +51,7 @@ import { SettingOutlined, ClearOutlined, MessageOutlined, HomeOutlined } from '@
 import RouteMenu from '/src/components/RouteMenu.jsx'
 import UserCard from '/src/components/UserCard.vue'
 
-import routes from '/src/router/console.ts'
+import routes from '/src/router/console'
 
 const router = useRouter()
 

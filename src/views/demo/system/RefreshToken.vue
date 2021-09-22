@@ -33,8 +33,8 @@
 
 <script setup lang="ts">
 import { reactive, watchEffect } from 'vue'
-import request from '/src/plugins/request.ts'
-import store from '/src/store/index.ts'
+import request from '/src/plugins/request'
+import store from '/src/store/index'
 
 import ContrastPre from '/src/components/ContrastPre.vue'
 
