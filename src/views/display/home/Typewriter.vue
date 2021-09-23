@@ -1,6 +1,6 @@
 <template>
   <section position="relative" h="screen" :style="style">
-    <pre font="mono" position="absolute" top="80" right="20" h="32" w="96" p="8" bg="[#ffffff7f]" backdrop="saturate-[180%] blur-xl filter" shadow="~ xl" />
+    <pre font="mono" position="absolute" top="80" right="20" h="32" w="96" p="8" bg="[#ffffff7f]" backdrop="saturate-[180%] blur-xl filter" shadow="xl" />
   </section>
 </template>
 

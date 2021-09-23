@@ -160,6 +160,19 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
+    path: '/demo/dependencies',
+    component: RouterView,
+    meta: { title: '依赖演示', icon: 'RobotOutlined' },
+    children: [
+      {
+        path: 'heropatterns',
+        meta: { title: '无缝纹理' },
+        component: () => import('/src/views/demo/dependencies/Heropatterns.vue'),
+      },
+    ],
+  },
+
+  {
     path: '/collection',
     component: RouterView,
     meta: { title: '页面收集', icon: 'HeartOutlined' },
