@@ -1,17 +1,28 @@
 import { RouteRecordRaw, RouterView } from 'vue-router'
 
+import {
+  ShopOutlined,
+  LayoutOutlined,
+  GithubOutlined,
+  UsbOutlined,
+  FireOutlined,
+  RobotOutlined,
+  ExperimentOutlined,
+  HeartOutlined,
+} from '@ant-design/icons-vue'
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import('/src/views/console/dashboard/index.vue'),
-    meta: { title: '控制台', icon: 'ShopOutlined' },
+    meta: { title: '控制台', icon: ShopOutlined },
   },
 
   {
     path: '/demo/route',
     component: RouterView,
-    meta: { title: '路由菜单', icon: 'LayoutOutlined' },
+    meta: { title: '路由菜单', icon: LayoutOutlined },
     children: [
       {
         path: 'relative-path',
@@ -49,7 +60,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'https://github.com/yuzhian/zero-vue',
         component: RouterView,
-        meta: { title: '外链', icon: 'GithubOutlined' },
+        meta: { title: '外链', icon: GithubOutlined },
       },
     ],
   },
@@ -57,7 +68,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/components',
     component: RouterView,
-    meta: { title: '组件演示', icon: 'UsbOutlined' },
+    meta: { title: '组件演示', icon: UsbOutlined },
     children: [
       {
         path: 'table',
@@ -106,7 +117,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/directives',
     component: RouterView,
-    meta: { title: '指令演示', icon: 'FireOutlined' },
+    meta: { title: '指令演示', icon: FireOutlined },
     children: [
       {
         path: 'support',
@@ -139,7 +150,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/system',
     component: RouterView,
-    meta: { title: '全局工具', icon: 'RobotOutlined' },
+    meta: { title: '全局工具', icon: RobotOutlined },
     children: [
       {
         path: 'store',
@@ -162,7 +173,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/demo/dependencies',
     component: RouterView,
-    meta: { title: '依赖演示', icon: 'RobotOutlined' },
+    meta: { title: '工具依赖', icon: ExperimentOutlined },
     children: [
       {
         path: 'heropatterns',
@@ -175,7 +186,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/collection',
     component: RouterView,
-    meta: { title: '页面收集', icon: 'HeartOutlined' },
+    meta: { title: '页面收集', icon: HeartOutlined },
     children: [
       {
         path: 'matrix',
