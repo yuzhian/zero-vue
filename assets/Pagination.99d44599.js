@@ -1,0 +1,1 @@
+import{f as o,r as a,o as n,c as s,w as r,u as i,x as c,J as p}from"./vendor.24be9f30.js";import{l as f}from"./gank.a966c49b.js";import"./request.56bc7853.js";import"./index.f567b9d8.js";const b=o({setup(l){return(m,_)=>{const e=a("z-pagination");return n(),s(e,{fetch:i(f),pageSize:50},{default:r(({title:t})=>[c("p",null,p(t),1)]),_:1},8,["fetch"])}}});export{b as default};

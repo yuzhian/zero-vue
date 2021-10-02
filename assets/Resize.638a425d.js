@@ -1,0 +1,1 @@
+import{f as n,K as a,a7 as c,a8 as r,o as i,s as l,y as f,J as u}from"./vendor.24be9f30.js";const _={h:"full",w:"full",bg:"blue-100"},h=n({setup(p){const e=a();function s(t){e.value=t[0].contentRect}return(t,d)=>{const o=c("resize");return r((i(),l("pre",_,[f(u(e.value),1)],512)),[[o,s]])}}});export{h as default};
