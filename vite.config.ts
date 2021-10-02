@@ -23,6 +23,8 @@ export default defineConfig({
           'layout-header-background': '#000000cc',
           'text-selection-bg': 'rgba(24, 144, 255, 0.25)',
           'text-color-inverse': 'currentColor',
+          'menu-inline-submenu-bg': 'unset',
+          'menu-bg': 'unset',
         },
         javascriptEnabled: true,
       },
