@@ -109,11 +109,6 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '指令演示', icon: 'FireOutlined' },
     children: [
       {
-        path: 'permission',
-        component: () => import('/src/views/demo/directives/Permission.vue'),
-        meta: { title: '权限指令' },
-      },
-      {
         path: 'support',
         component: () => import('/src/views/demo/directives/Support.vue'),
         meta: { title: '状态支持' },
@@ -150,6 +145,11 @@ const routes: RouteRecordRaw[] = [
         path: 'store',
         meta: { title: '全局状态' },
         component: () => import('/src/views/demo/system/Store.vue'),
+      },
+      {
+        path: 'permission',
+        component: () => import('/src/views/demo/system/Permission.vue'),
+        meta: { title: '权限控制' },
       },
       {
         path: 'refresh_token',
