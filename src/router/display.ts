@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
+import { TrophyOutlined } from '@ant-design/icons-vue'
 
 const router: RouteRecordRaw[] = [
   {
@@ -11,7 +12,7 @@ const router: RouteRecordRaw[] = [
     path: '/display/full',
     name: 'DisplayFull',
     component: () => import('/src/views/demo/route/PreRoute.vue'),
-    meta: { title: 'DisplayFull Page', icon: 'TrophyOutlined' },
+    meta: { title: 'DisplayFull Page', icon: TrophyOutlined },
   },
   {
     path: '/display/hidden',
